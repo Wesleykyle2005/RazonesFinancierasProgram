@@ -2,6 +2,7 @@ using RazonesFinancieras.Estados_financieros;
 using RazonesFinancieras.Razones_de_actividad;
 using RazonesFinancieras.Razones_de_endeudamiento;
 using RazonesFinancieras.Razones_de_liquidez;
+using RazonesFinancieras.Razones_de_rentabilidad;
 
 namespace RazonesFinancieras
 {
@@ -18,7 +19,12 @@ namespace RazonesFinancieras
         PeriodoDePagoPromedioForm PeriodoDePagoPromedio;
         RotacionDeActivosFijosForm RotacionDeActivosFijos;
         RotacionDeActivosTotalesForm RotacionDeActivosTotales;
-        RazonDeDeudaTotalForm RazonDeDeudaTotal; 
+        RazonDeDeudaTotalForm RazonDeDeudaTotal;
+        RazonDePasivoACapitalForm RazonDePasivoACapital;
+        RazonDeRotaciónDeInteresAUtilidadesForm RazonDeRotaciónDeInteresAUtilidades;
+        MargenDeUtilidadBrutaForm MargenDeUtilidadBruta;
+        MargenDeUtilidadDeOperacionForm MargenDeUtilidadDeOperacion;
+        MargenDeUtilidadNetaForm MargenDeUtilidadNeta;
         public Home()
         {
             InitializeComponent();
@@ -201,6 +207,35 @@ namespace RazonesFinancieras
         {
             AbrirFormulario(RazonDeDeudaTotal, new RazonDeDeudaTotalForm());
         }
+
+        private void RazonDePasivoACapitalButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(RazonDePasivoACapital, new RazonDePasivoACapitalForm());
+        }
+
+        private void RazonDeRotacionDeInteresAUtilidadesButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(RazonDeRotaciónDeInteresAUtilidades, new RazonDeRotaciónDeInteresAUtilidadesForm());
+        }
+
+        private void MargenDeUtilidadBrutaButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(MargenDeUtilidadBruta, new MargenDeUtilidadBrutaForm());
+
+        }
+
+        private void MargenDeUtilidadDeOperacionButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(MargenDeUtilidadDeOperacion, new MargenDeUtilidadDeOperacionForm());
+
+        }
+
+        private void MargenDeUtilidadNetaButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(MargenDeUtilidadNeta,new MargenDeUtilidadNetaForm());
+        }
+
+
 
 
 

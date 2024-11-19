@@ -445,6 +445,7 @@
             RazonDeRotacionDeInteresAUtilidadesButton.Text = "Razón de rotación de interés a utilidades";
             RazonDeRotacionDeInteresAUtilidadesButton.TextAlign = ContentAlignment.MiddleLeft;
             RazonDeRotacionDeInteresAUtilidadesButton.UseVisualStyleBackColor = false;
+            RazonDeRotacionDeInteresAUtilidadesButton.Click += RazonDeRotacionDeInteresAUtilidadesButton_Click;
             // 
             // RazonDePasivoACapitalButton
             // 
@@ -461,6 +462,7 @@
             RazonDePasivoACapitalButton.Text = "Razón de pasivo a capital";
             RazonDePasivoACapitalButton.TextAlign = ContentAlignment.MiddleLeft;
             RazonDePasivoACapitalButton.UseVisualStyleBackColor = false;
+            RazonDePasivoACapitalButton.Click += RazonDePasivoACapitalButton_Click;
             // 
             // RazonDeDeudaTotalButton
             // 
@@ -531,6 +533,7 @@
             MargenDeUtilidadNetaButton.Text = "Margen de utilidad neta";
             MargenDeUtilidadNetaButton.TextAlign = ContentAlignment.MiddleLeft;
             MargenDeUtilidadNetaButton.UseVisualStyleBackColor = false;
+            MargenDeUtilidadNetaButton.Click += MargenDeUtilidadNetaButton_Click;
             // 
             // MargenDeUtilidadDeOperacionButton
             // 
@@ -547,6 +550,7 @@
             MargenDeUtilidadDeOperacionButton.Text = "Margen de utilidad de operación";
             MargenDeUtilidadDeOperacionButton.TextAlign = ContentAlignment.MiddleLeft;
             MargenDeUtilidadDeOperacionButton.UseVisualStyleBackColor = false;
+            MargenDeUtilidadDeOperacionButton.Click += MargenDeUtilidadDeOperacionButton_Click;
             // 
             // MargenDeUtilidadBrutaButton
             // 
@@ -563,6 +567,7 @@
             MargenDeUtilidadBrutaButton.Text = "Margen de utilidad bruta";
             MargenDeUtilidadBrutaButton.TextAlign = ContentAlignment.MiddleLeft;
             MargenDeUtilidadBrutaButton.UseVisualStyleBackColor = false;
+            MargenDeUtilidadBrutaButton.Click += MargenDeUtilidadBrutaButton_Click;
             // 
             // iconButtonRazonRentabilidad
             // 
