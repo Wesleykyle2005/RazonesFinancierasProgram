@@ -477,6 +477,7 @@
             RazonDeDeudaTotalButton.Text = "Razón de deuda total";
             RazonDeDeudaTotalButton.TextAlign = ContentAlignment.MiddleLeft;
             RazonDeDeudaTotalButton.UseVisualStyleBackColor = false;
+            RazonDeDeudaTotalButton.Click += RazonDeDeudaTotalButton_Click;
             // 
             // iconButtonRazonEndeudamiento
             // 

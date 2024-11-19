@@ -1,5 +1,6 @@
 using RazonesFinancieras.Estados_financieros;
 using RazonesFinancieras.Razones_de_actividad;
+using RazonesFinancieras.Razones_de_endeudamiento;
 using RazonesFinancieras.Razones_de_liquidez;
 
 namespace RazonesFinancieras
@@ -17,6 +18,7 @@ namespace RazonesFinancieras
         PeriodoDePagoPromedioForm PeriodoDePagoPromedio;
         RotacionDeActivosFijosForm RotacionDeActivosFijos;
         RotacionDeActivosTotalesForm RotacionDeActivosTotales;
+        RazonDeDeudaTotalForm RazonDeDeudaTotal; 
         public Home()
         {
             InitializeComponent();
@@ -181,12 +183,12 @@ namespace RazonesFinancieras
         private void PeriodoDePagoPromedioButton_Click(object sender, EventArgs e)
         {
             AbrirFormulario(PeriodoDePagoPromedio, new PeriodoDePagoPromedioForm());
-           
+
         }
 
         private void RotacionDeActivosFijosButton_Click(object sender, EventArgs e)
         {
-            
+
             AbrirFormulario(RotacionDeActivosFijos, new RotacionDeActivosFijosForm());
         }
 
@@ -194,7 +196,12 @@ namespace RazonesFinancieras
         {
             AbrirFormulario(RotacionDeActivosTotales, new RotacionDeActivosTotalesForm());
         }
-        
+
+        private void RazonDeDeudaTotalButton_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(RazonDeDeudaTotal, new RazonDeDeudaTotalForm());
+        }
+
 
 
 

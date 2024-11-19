@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Razones de rentabilidad\" />
-    <Folder Include="Razones de endeudamiento\" />
   </ItemGroup>
 
 </Project>
