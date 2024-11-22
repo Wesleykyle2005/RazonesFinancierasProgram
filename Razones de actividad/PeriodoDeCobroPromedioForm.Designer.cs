@@ -1,6 +1,6 @@
-﻿namespace RazonesFinancieras.Razones_de_rentabilidad
+﻿namespace RazonesFinancieras.Razones_de_actividad
 {
-    partial class MargenDeUtilidadNetaForm
+    partial class PeriodoDeCobroPromedioForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@
             EvaluarButton = new Button();
             label4 = new Label();
             textBox1 = new TextBox();
+            label9 = new Label();
             label3 = new Label();
+            textBox9 = new TextBox();
             label2 = new Label();
-            label1 = new Label();
-            CapitalDeTrabajoNetotextBox = new TextBox();
+            textBox7 = new TextBox();
             PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
-            ActivoCirculantetextBox = new TextBox();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -46,11 +46,11 @@
             EvaluarButton.FlatStyle = FlatStyle.Flat;
             EvaluarButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             EvaluarButton.ForeColor = Color.Black;
-            EvaluarButton.Location = new Point(299, 247);
+            EvaluarButton.Location = new Point(300, 270);
             EvaluarButton.Margin = new Padding(0);
             EvaluarButton.Name = "EvaluarButton";
             EvaluarButton.Size = new Size(100, 30);
-            EvaluarButton.TabIndex = 17;
+            EvaluarButton.TabIndex = 55;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
             // 
@@ -59,103 +59,103 @@
             label4.BackColor = Color.FromArgb(150, 150, 150);
             label4.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(11, 275);
+            label4.Location = new Point(0, 280);
             label4.Name = "label4";
             label4.Size = new Size(150, 20);
-            label4.TabIndex = 16;
+            label4.TabIndex = 54;
             label4.Text = "Conclusion";
             // 
             // textBox1
             // 
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(0, 304);
+            textBox1.Location = new Point(0, 300);
             textBox1.Margin = new Padding(0);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(700, 100);
-            textBox1.TabIndex = 15;
+            textBox1.TabIndex = 53;
+            // 
+            // label9
+            // 
+            label9.BackColor = Color.FromArgb(150, 150, 150);
+            label9.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            label9.ForeColor = Color.Black;
+            label9.Location = new Point(50, 100);
+            label9.Name = "label9";
+            label9.Size = new Size(150, 40);
+            label9.TabIndex = 50;
+            label9.Text = "Cuentas por cobrar";
             // 
             // label3
             // 
             label3.BackColor = Color.FromArgb(150, 150, 150);
             label3.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(149, 197);
+            label3.Location = new Point(140, 200);
             label3.Name = "label3";
-            label3.Size = new Size(150, 20);
-            label3.TabIndex = 14;
-            label3.Text = "Capital de trabajo neto";
+            label3.Size = new Size(160, 40);
+            label3.TabIndex = 52;
+            label3.Text = "Promedio de cobro promedio";
+            // 
+            // textBox9
+            // 
+            textBox9.BorderStyle = BorderStyle.None;
+            textBox9.Location = new Point(300, 200);
+            textBox9.Multiline = true;
+            textBox9.Name = "textBox9";
+            textBox9.Size = new Size(100, 20);
+            textBox9.TabIndex = 49;
             // 
             // label2
             // 
             label2.BackColor = Color.FromArgb(150, 150, 150);
             label2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(349, 97);
+            label2.Location = new Point(400, 100);
             label2.Name = "label2";
             label2.Size = new Size(150, 20);
-            label2.TabIndex = 13;
-            label2.Text = "Pasivo circulante";
+            label2.TabIndex = 51;
+            label2.Text = "Ventas anuales";
             // 
-            // label1
+            // textBox7
             // 
-            label1.BackColor = Color.FromArgb(150, 150, 150);
-            label1.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(49, 97);
-            label1.Name = "label1";
-            label1.Size = new Size(150, 20);
-            label1.TabIndex = 12;
-            label1.Text = "Activo circulante";
-            // 
-            // CapitalDeTrabajoNetotextBox
-            // 
-            CapitalDeTrabajoNetotextBox.BorderStyle = BorderStyle.None;
-            CapitalDeTrabajoNetotextBox.Location = new Point(299, 197);
-            CapitalDeTrabajoNetotextBox.Multiline = true;
-            CapitalDeTrabajoNetotextBox.Name = "CapitalDeTrabajoNetotextBox";
-            CapitalDeTrabajoNetotextBox.Size = new Size(100, 20);
-            CapitalDeTrabajoNetotextBox.TabIndex = 11;
+            textBox7.BorderStyle = BorderStyle.None;
+            textBox7.Location = new Point(200, 100);
+            textBox7.Margin = new Padding(0);
+            textBox7.Multiline = true;
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(100, 20);
+            textBox7.TabIndex = 47;
             // 
             // PasivoCirculantetextBoxPasivoCirculantetextBox
             // 
             PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(499, 97);
+            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
             PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
             PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
             PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
             PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 10;
+            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 48;
             // 
-            // ActivoCirculantetextBox
-            // 
-            ActivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            ActivoCirculantetextBox.Location = new Point(199, 97);
-            ActivoCirculantetextBox.Margin = new Padding(0);
-            ActivoCirculantetextBox.Multiline = true;
-            ActivoCirculantetextBox.Name = "ActivoCirculantetextBox";
-            ActivoCirculantetextBox.Size = new Size(100, 20);
-            ActivoCirculantetextBox.TabIndex = 9;
-            // 
-            // MargenDeUtilidadNetaForm
+            // PeriodoDeCobroPromedioForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
-            ClientSize = new Size(700, 500);
+            ClientSize = new Size(700, 450);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
             Controls.Add(textBox1);
+            Controls.Add(label9);
             Controls.Add(label3);
+            Controls.Add(textBox9);
             Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(CapitalDeTrabajoNetotextBox);
+            Controls.Add(textBox7);
             Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
-            Controls.Add(ActivoCirculantetextBox);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "MargenDeUtilidadNetaForm";
-            Text = "MargenDeUtilidadNetaForm";
-            Load += MargenDeUtilidadNetaForm_Load;
+            Name = "PeriodoDeCobroPromedioForm";
+            Text = "PeriodoDePagoPromedioForm";
+            Load += PeriodoDePagoPromedioForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,11 +165,11 @@
         private Button EvaluarButton;
         private Label label4;
         private TextBox textBox1;
+        private Label label9;
         private Label label3;
+        private TextBox textBox9;
         private Label label2;
-        private Label label1;
-        private TextBox CapitalDeTrabajoNetotextBox;
+        private TextBox textBox7;
         private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
-        private TextBox ActivoCirculantetextBox;
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RazonesFinancieras.Razones_de_actividad
 {
-    public partial class PeriodoDePagoPromedioForm : Form
+    public partial class PeriodoDeCobroPromedioForm : Form
     {
-        public PeriodoDePagoPromedioForm()
+        public PeriodoDeCobroPromedioForm()
         {
             InitializeComponent();
         }

@@ -354,7 +354,7 @@
             PeriodoDePagoPromedioButton.Name = "PeriodoDePagoPromedioButton";
             PeriodoDePagoPromedioButton.Size = new Size(300, 25);
             PeriodoDePagoPromedioButton.TabIndex = 6;
-            PeriodoDePagoPromedioButton.Text = "Periodo de pago promedio";
+            PeriodoDePagoPromedioButton.Text = "Periodo de cobro promedio";
             PeriodoDePagoPromedioButton.TextAlign = ContentAlignment.MiddleLeft;
             PeriodoDePagoPromedioButton.UseVisualStyleBackColor = false;
             PeriodoDePagoPromedioButton.Click += PeriodoDePagoPromedioButton_Click;
@@ -621,7 +621,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(59, 55, 64);
+            BackColor = Color.White;
             ClientSize = new Size(1000, 750);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);
@@ -630,6 +630,7 @@
             IsMdiContainer = true;
             Name = "Home";
             Text = "Home";
+            TransparencyKey = Color.Fuchsia;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);

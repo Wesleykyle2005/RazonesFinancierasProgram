@@ -16,7 +16,7 @@ namespace RazonesFinancieras
         PruebaRapidaForm PruebaRapida;
         RazonDeRotacionDeInventarioForm RazonDeRotacion;
         RazonDeCuentasPorCobrarForm RazonDeCuentasPorCobrar;
-        PeriodoDePagoPromedioForm PeriodoDePagoPromedio;
+        PeriodoDeCobroPromedioForm PeriodoDePagoPromedio;
         RotacionDeActivosFijosForm RotacionDeActivosFijos;
         RotacionDeActivosTotalesForm RotacionDeActivosTotales;
         RazonDeDeudaTotalForm RazonDeDeudaTotal;
@@ -31,6 +31,9 @@ namespace RazonesFinancieras
             InitializeMenuStates();
             mdiProp();
             this.WindowState = FormWindowState.Maximized;
+            nightControlBox1.EnableMaximizeButton=false;
+            nightControlBox1.DisableMaximizeColor= Color.FromArgb(255,242, 193, 133);
+            
         }
         private void mdiProp()
         {
@@ -188,7 +191,7 @@ namespace RazonesFinancieras
 
         private void PeriodoDePagoPromedioButton_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(PeriodoDePagoPromedio, new PeriodoDePagoPromedioForm());
+            AbrirFormulario(PeriodoDePagoPromedio, new PeriodoDeCobroPromedioForm());
 
         }
 
@@ -249,7 +252,18 @@ namespace RazonesFinancieras
                 formulario = nuevoFormulario;
                 formulario.FormClosed += (s, args) => formulario = null; // Liberar referencia al cerrar
                 formulario.MdiParent = this;
-                formulario.Dock = DockStyle.Fill;
+
+                formulario.StartPosition = FormStartPosition.Manual; // Evitar que el sistema sobreescriba la posición
+                formulario.Location = new Point(0, 0);
+
+                formulario.Shown += (s, args) =>
+                {
+                    // Desplazar los controles después de que el formulario se muestre
+                    DesplazarControles(formulario, (this.Height-formulario.Height)/2);
+                    formulario.Dock= DockStyle.Fill;
+                    
+                };
+
                 formulario.Show();
             }
             else
@@ -257,6 +271,27 @@ namespace RazonesFinancieras
                 formulario.Activate();
             }
         }
+
+
+
+
+
+
+        private void DesplazarControles(Control parent, int desplazamientoHorizontal)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                // Ajustar la posición horizontal del control
+                control.Location = new Point(control.Location.X + desplazamientoHorizontal, control.Location.Y);
+
+                // Si el control contiene otros controles, desplazar recursivamente
+                if (control.HasChildren)
+                {
+                    DesplazarControles(control, desplazamientoHorizontal);
+                }
+            }
+        }
+
 
     }
 }
