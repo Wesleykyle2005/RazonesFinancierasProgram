@@ -33,9 +33,9 @@
             ConclusionTextBox = new TextBox();
             label3 = new Label();
             label2 = new Label();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            PasivoCirculantetextBox = new TextBox();
             ActivocirculanteTextbox = new TextBox();
-            IndiceSolvenciaButton = new TextBox();
+            IndiceSolvenciatxtBox = new TextBox();
             label9 = new Label();
             button2 = new Button();
             copyButton = new Button();
@@ -55,6 +55,7 @@
             EvaluarButton.TabIndex = 17;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
+            EvaluarButton.Click += EvaluarButton_Click;
             // 
             // label4
             // 
@@ -100,16 +101,16 @@
             label2.TabIndex = 13;
             label2.Text = "Pasivo circulante";
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // PasivoCirculantetextBox
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 10;
+            PasivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
+            PasivoCirculantetextBox.BorderStyle = BorderStyle.None;
+            PasivoCirculantetextBox.Location = new Point(550, 100);
+            PasivoCirculantetextBox.Margin = new Padding(0);
+            PasivoCirculantetextBox.Multiline = true;
+            PasivoCirculantetextBox.Name = "PasivoCirculantetextBox";
+            PasivoCirculantetextBox.Size = new Size(100, 20);
+            PasivoCirculantetextBox.TabIndex = 10;
             // 
             // ActivocirculanteTextbox
             // 
@@ -122,15 +123,15 @@
             ActivocirculanteTextbox.Size = new Size(100, 20);
             ActivocirculanteTextbox.TabIndex = 9;
             // 
-            // IndiceSolvenciaButton
+            // IndiceSolvenciatxtBox
             // 
-            IndiceSolvenciaButton.BackColor = Color.FromArgb(242, 193, 133);
-            IndiceSolvenciaButton.BorderStyle = BorderStyle.None;
-            IndiceSolvenciaButton.Location = new Point(300, 200);
-            IndiceSolvenciaButton.Multiline = true;
-            IndiceSolvenciaButton.Name = "IndiceSolvenciaButton";
-            IndiceSolvenciaButton.Size = new Size(100, 20);
-            IndiceSolvenciaButton.TabIndex = 11;
+            IndiceSolvenciatxtBox.BackColor = Color.FromArgb(242, 193, 133);
+            IndiceSolvenciatxtBox.BorderStyle = BorderStyle.None;
+            IndiceSolvenciatxtBox.Location = new Point(300, 200);
+            IndiceSolvenciatxtBox.Multiline = true;
+            IndiceSolvenciatxtBox.Name = "IndiceSolvenciatxtBox";
+            IndiceSolvenciatxtBox.Size = new Size(100, 20);
+            IndiceSolvenciatxtBox.TabIndex = 11;
             // 
             // label9
             // 
@@ -186,10 +187,10 @@
             Controls.Add(ConclusionTextBox);
             Controls.Add(label9);
             Controls.Add(label3);
-            Controls.Add(IndiceSolvenciaButton);
+            Controls.Add(IndiceSolvenciatxtBox);
             Controls.Add(label2);
             Controls.Add(ActivocirculanteTextbox);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(PasivoCirculantetextBox);
             FormBorderStyle = FormBorderStyle.None;
             Name = "IndiceDeSolvenciaForm";
             Text = "IndiceDeSolvenciaForm";
@@ -205,9 +206,9 @@
         private TextBox ConclusionTextBox;
         private Label label3;
         private Label label2;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox PasivoCirculantetextBox;
         private TextBox ActivocirculanteTextbox;
-        private TextBox IndiceSolvenciaButton;
+        private TextBox IndiceSolvenciatxtBox;
         private Label label9;
         private Button button2;
         private Button copyButton;

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             ActivoCirculantetextBox = new TextBox();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            PasivoCirculantetextBox = new TextBox();
             CapitalDeTrabajoNetotextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -53,17 +53,17 @@
             ActivoCirculantetextBox.Size = new Size(100, 20);
             ActivoCirculantetextBox.TabIndex = 0;
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // PasivoCirculantetextBox
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.ReadOnly = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 1;
+            PasivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
+            PasivoCirculantetextBox.BorderStyle = BorderStyle.None;
+            PasivoCirculantetextBox.Location = new Point(550, 100);
+            PasivoCirculantetextBox.Margin = new Padding(0);
+            PasivoCirculantetextBox.Multiline = true;
+            PasivoCirculantetextBox.Name = "PasivoCirculantetextBox";
+            PasivoCirculantetextBox.ReadOnly = true;
+            PasivoCirculantetextBox.Size = new Size(100, 20);
+            PasivoCirculantetextBox.TabIndex = 1;
             // 
             // CapitalDeTrabajoNetotextBox
             // 
@@ -195,7 +195,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(CapitalDeTrabajoNetotextBox);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(PasivoCirculantetextBox);
             Controls.Add(ActivoCirculantetextBox);
             FormBorderStyle = FormBorderStyle.None;
             Name = "CapitalDeTrabajoNetoForm";
@@ -208,7 +208,7 @@
         #endregion
 
         private TextBox ActivoCirculantetextBox;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox PasivoCirculantetextBox;
         private TextBox CapitalDeTrabajoNetotextBox;
         private Label label1;
         private Label label2;

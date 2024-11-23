@@ -19,7 +19,12 @@ namespace RazonesFinancieras.Razones_de_actividad
 
         private void PeriodoDePagoPromedioForm_Load(object sender, EventArgs e)
         {
-            this.ControlBox=false;
+            this.ControlBox = false;
+        }
+
+        private void EvaluarButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
