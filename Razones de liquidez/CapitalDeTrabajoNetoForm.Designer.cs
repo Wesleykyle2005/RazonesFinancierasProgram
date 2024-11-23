@@ -34,38 +34,46 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            ConclusionTextBox = new TextBox();
             label4 = new Label();
             EvaluarButton = new Button();
+            copyButton = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // ActivoCirculantetextBox
             // 
+            ActivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
             ActivoCirculantetextBox.BorderStyle = BorderStyle.None;
             ActivoCirculantetextBox.Location = new Point(200, 100);
             ActivoCirculantetextBox.Margin = new Padding(0);
             ActivoCirculantetextBox.Multiline = true;
             ActivoCirculantetextBox.Name = "ActivoCirculantetextBox";
+            ActivoCirculantetextBox.ReadOnly = true;
             ActivoCirculantetextBox.Size = new Size(100, 20);
             ActivoCirculantetextBox.TabIndex = 0;
             // 
             // PasivoCirculantetextBoxPasivoCirculantetextBox
             // 
+            PasivoCirculantetextBoxPasivoCirculantetextBox.BackColor = Color.FromArgb(242, 193, 133);
             PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
             PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
             PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
             PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
             PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
+            PasivoCirculantetextBoxPasivoCirculantetextBox.ReadOnly = true;
             PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
             PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 1;
             // 
             // CapitalDeTrabajoNetotextBox
             // 
+            CapitalDeTrabajoNetotextBox.BackColor = Color.FromArgb(242, 193, 133);
             CapitalDeTrabajoNetotextBox.BorderStyle = BorderStyle.None;
             CapitalDeTrabajoNetotextBox.Location = new Point(300, 200);
             CapitalDeTrabajoNetotextBox.Margin = new Padding(0);
             CapitalDeTrabajoNetotextBox.Multiline = true;
             CapitalDeTrabajoNetotextBox.Name = "CapitalDeTrabajoNetotextBox";
+            CapitalDeTrabajoNetotextBox.ReadOnly = true;
             CapitalDeTrabajoNetotextBox.Size = new Size(100, 20);
             CapitalDeTrabajoNetotextBox.TabIndex = 2;
             // 
@@ -102,15 +110,17 @@
             label3.TabIndex = 5;
             label3.Text = "Capital de trabajo neto";
             // 
-            // textBox1
+            // ConclusionTextBox
             // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(0, 300);
-            textBox1.Margin = new Padding(0);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(700, 100);
-            textBox1.TabIndex = 6;
+            ConclusionTextBox.BackColor = Color.White;
+            ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Location = new Point(0, 300);
+            ConclusionTextBox.Margin = new Padding(0);
+            ConclusionTextBox.Multiline = true;
+            ConclusionTextBox.Name = "ConclusionTextBox";
+            ConclusionTextBox.ReadOnly = true;
+            ConclusionTextBox.Size = new Size(700, 100);
+            ConclusionTextBox.TabIndex = 6;
             // 
             // label4
             // 
@@ -125,11 +135,11 @@
             // 
             // EvaluarButton
             // 
-            EvaluarButton.BackColor = Color.FromArgb(150, 150, 150);
+            EvaluarButton.BackColor = Color.Black;
             EvaluarButton.FlatAppearance.BorderSize = 0;
             EvaluarButton.FlatStyle = FlatStyle.Flat;
             EvaluarButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            EvaluarButton.ForeColor = Color.Black;
+            EvaluarButton.ForeColor = Color.White;
             EvaluarButton.Location = new Point(300, 270);
             EvaluarButton.Margin = new Padding(0);
             EvaluarButton.Name = "EvaluarButton";
@@ -137,6 +147,38 @@
             EvaluarButton.TabIndex = 8;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
+            EvaluarButton.Click += EvaluarButton_Click;
+            // 
+            // copyButton
+            // 
+            copyButton.BackColor = Color.FromArgb(150, 150, 150);
+            copyButton.FlatAppearance.BorderSize = 0;
+            copyButton.FlatStyle = FlatStyle.Flat;
+            copyButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            copyButton.ForeColor = Color.Black;
+            copyButton.Location = new Point(0, 400);
+            copyButton.Margin = new Padding(0);
+            copyButton.Name = "copyButton";
+            copyButton.Size = new Size(200, 30);
+            copyButton.TabIndex = 9;
+            copyButton.Text = "Copiar al portapapeles";
+            copyButton.UseVisualStyleBackColor = false;
+            copyButton.Click += copyButton_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(150, 150, 150);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button2.ForeColor = Color.Black;
+            button2.Location = new Point(500, 400);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(200, 30);
+            button2.TabIndex = 10;
+            button2.Text = "Guardar al informe final";
+            button2.UseVisualStyleBackColor = false;
             // 
             // CapitalDeTrabajoNetoForm
             // 
@@ -144,9 +186,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
+            Controls.Add(button2);
+            Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(ConclusionTextBox);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -169,8 +213,10 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox ConclusionTextBox;
         private Label label4;
         private Button EvaluarButton;
+        private Button copyButton;
+        private Button button2;
     }
 }

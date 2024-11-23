@@ -21,5 +21,26 @@ namespace RazonesFinancieras.Razones_de_liquidez
         {
             this.ControlBox = false;
         }
+
+        private void EvaluarButton_Click(object sender, EventArgs e)
+        {
+            ActivoCirculantetextBox.Text = "a";
+            PasivoCirculantetextBoxPasivoCirculantetextBox.Text = "a";
+            CapitalDeTrabajoNetotextBox.Text = "a";
+            ConclusionTextBox.Text = "qwertyuiiopasdfghjklzxcvbnm";
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {         
+            if (!string.IsNullOrWhiteSpace(ConclusionTextBox.Text))
+            {
+                Clipboard.SetText(ConclusionTextBox.Text);
+                MessageBox.Show("Contenido copiado al portapapeles.", "Copiar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

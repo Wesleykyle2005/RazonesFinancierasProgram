@@ -82,20 +82,20 @@
             label9.ForeColor = Color.Black;
             label9.Location = new Point(50, 100);
             label9.Name = "label9";
-            label9.Size = new Size(150, 40);
+            label9.Size = new Size(150, 20);
             label9.TabIndex = 41;
-            label9.Text = "Ventas netas al credito";
+            label9.Text = "Ventas al crédito";
             // 
             // label3
             // 
             label3.BackColor = Color.FromArgb(150, 150, 150);
             label3.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(140, 200);
+            label3.Location = new Point(150, 200);
             label3.Name = "label3";
-            label3.Size = new Size(160, 40);
+            label3.Size = new Size(150, 40);
             label3.TabIndex = 43;
-            label3.Text = "Rotacion de cuentas por cobrar";
+            label3.Text = "Rotacion cuentas por cobrar";
             // 
             // textBox9
             // 
@@ -115,7 +115,7 @@
             label2.Name = "label2";
             label2.Size = new Size(150, 40);
             label2.TabIndex = 42;
-            label2.Text = "Cuentas por conbrar netas";
+            label2.Text = "Cuentas por cobrar";
             // 
             // textBox7
             // 
