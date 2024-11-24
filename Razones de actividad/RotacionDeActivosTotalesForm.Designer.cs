@@ -33,10 +33,10 @@
             textBox1 = new TextBox();
             label9 = new Label();
             label3 = new Label();
-            textBox9 = new TextBox();
+            RotacionDeActivosTotalestxt = new TextBox();
             label2 = new Label();
-            textBox7 = new TextBox();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            Ventastxt = new TextBox();
+            ACtivosTotalestxt = new TextBox();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -53,6 +53,7 @@
             EvaluarButton.TabIndex = 64;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
+            EvaluarButton.Click += EvaluarButton_Click;
             // 
             // label4
             // 
@@ -97,14 +98,14 @@
             label3.TabIndex = 61;
             label3.Text = "Rotacion de los activos totales";
             // 
-            // textBox9
+            // RotacionDeActivosTotalestxt
             // 
-            textBox9.BorderStyle = BorderStyle.None;
-            textBox9.Location = new Point(300, 200);
-            textBox9.Multiline = true;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(100, 20);
-            textBox9.TabIndex = 58;
+            RotacionDeActivosTotalestxt.BorderStyle = BorderStyle.None;
+            RotacionDeActivosTotalestxt.Location = new Point(300, 200);
+            RotacionDeActivosTotalestxt.Multiline = true;
+            RotacionDeActivosTotalestxt.Name = "RotacionDeActivosTotalestxt";
+            RotacionDeActivosTotalestxt.Size = new Size(100, 20);
+            RotacionDeActivosTotalestxt.TabIndex = 58;
             // 
             // label2
             // 
@@ -117,25 +118,25 @@
             label2.TabIndex = 60;
             label2.Text = "Activos totales";
             // 
-            // textBox7
+            // Ventastxt
             // 
-            textBox7.BorderStyle = BorderStyle.None;
-            textBox7.Location = new Point(200, 100);
-            textBox7.Margin = new Padding(0);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(100, 20);
-            textBox7.TabIndex = 56;
+            Ventastxt.BorderStyle = BorderStyle.None;
+            Ventastxt.Location = new Point(200, 100);
+            Ventastxt.Margin = new Padding(0);
+            Ventastxt.Multiline = true;
+            Ventastxt.Name = "Ventastxt";
+            Ventastxt.Size = new Size(100, 20);
+            Ventastxt.TabIndex = 56;
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // ACtivosTotalestxt
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 57;
+            ACtivosTotalestxt.BorderStyle = BorderStyle.None;
+            ACtivosTotalestxt.Location = new Point(550, 100);
+            ACtivosTotalestxt.Margin = new Padding(0);
+            ACtivosTotalestxt.Multiline = true;
+            ACtivosTotalestxt.Name = "ACtivosTotalestxt";
+            ACtivosTotalestxt.Size = new Size(100, 20);
+            ACtivosTotalestxt.TabIndex = 57;
             // 
             // RotacionDeActivosTotalesForm
             // 
@@ -148,10 +149,10 @@
             Controls.Add(textBox1);
             Controls.Add(label9);
             Controls.Add(label3);
-            Controls.Add(textBox9);
+            Controls.Add(RotacionDeActivosTotalestxt);
             Controls.Add(label2);
-            Controls.Add(textBox7);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(Ventastxt);
+            Controls.Add(ACtivosTotalestxt);
             FormBorderStyle = FormBorderStyle.None;
             Name = "RotacionDeActivosTotalesForm";
             Text = "RotacionDeActivosTotalesForm";
@@ -167,9 +168,9 @@
         private TextBox textBox1;
         private Label label9;
         private Label label3;
-        private TextBox textBox9;
+        private TextBox RotacionDeActivosTotalestxt;
         private Label label2;
-        private TextBox textBox7;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox Ventastxt;
+        private TextBox ACtivosTotalestxt;
     }
 }

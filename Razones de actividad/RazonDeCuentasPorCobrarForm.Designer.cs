@@ -33,10 +33,10 @@
             textBox1 = new TextBox();
             label9 = new Label();
             label3 = new Label();
-            textBox9 = new TextBox();
+            RotacionDeCuentasPorCobrartxt = new TextBox();
             label2 = new Label();
-            textBox7 = new TextBox();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            Ventastxt = new TextBox();
+            CuentasPorCobrartxt = new TextBox();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -53,6 +53,7 @@
             EvaluarButton.TabIndex = 46;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
+            EvaluarButton.Click += EvaluarButton_Click;
             // 
             // label4
             // 
@@ -97,14 +98,14 @@
             label3.TabIndex = 43;
             label3.Text = "Rotacion cuentas por cobrar";
             // 
-            // textBox9
+            // RotacionDeCuentasPorCobrartxt
             // 
-            textBox9.BorderStyle = BorderStyle.None;
-            textBox9.Location = new Point(300, 200);
-            textBox9.Multiline = true;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(100, 20);
-            textBox9.TabIndex = 40;
+            RotacionDeCuentasPorCobrartxt.BorderStyle = BorderStyle.None;
+            RotacionDeCuentasPorCobrartxt.Location = new Point(300, 200);
+            RotacionDeCuentasPorCobrartxt.Multiline = true;
+            RotacionDeCuentasPorCobrartxt.Name = "RotacionDeCuentasPorCobrartxt";
+            RotacionDeCuentasPorCobrartxt.Size = new Size(100, 20);
+            RotacionDeCuentasPorCobrartxt.TabIndex = 40;
             // 
             // label2
             // 
@@ -117,25 +118,25 @@
             label2.TabIndex = 42;
             label2.Text = "Cuentas por cobrar";
             // 
-            // textBox7
+            // Ventastxt
             // 
-            textBox7.BorderStyle = BorderStyle.None;
-            textBox7.Location = new Point(200, 100);
-            textBox7.Margin = new Padding(0);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(100, 20);
-            textBox7.TabIndex = 38;
+            Ventastxt.BorderStyle = BorderStyle.None;
+            Ventastxt.Location = new Point(200, 100);
+            Ventastxt.Margin = new Padding(0);
+            Ventastxt.Multiline = true;
+            Ventastxt.Name = "Ventastxt";
+            Ventastxt.Size = new Size(100, 20);
+            Ventastxt.TabIndex = 38;
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // CuentasPorCobrartxt
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 39;
+            CuentasPorCobrartxt.BorderStyle = BorderStyle.None;
+            CuentasPorCobrartxt.Location = new Point(550, 100);
+            CuentasPorCobrartxt.Margin = new Padding(0);
+            CuentasPorCobrartxt.Multiline = true;
+            CuentasPorCobrartxt.Name = "CuentasPorCobrartxt";
+            CuentasPorCobrartxt.Size = new Size(100, 20);
+            CuentasPorCobrartxt.TabIndex = 39;
             // 
             // RazonDeCuentasPorCobrarForm
             // 
@@ -148,10 +149,10 @@
             Controls.Add(textBox1);
             Controls.Add(label9);
             Controls.Add(label3);
-            Controls.Add(textBox9);
+            Controls.Add(RotacionDeCuentasPorCobrartxt);
             Controls.Add(label2);
-            Controls.Add(textBox7);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(Ventastxt);
+            Controls.Add(CuentasPorCobrartxt);
             FormBorderStyle = FormBorderStyle.None;
             Name = "RazonDeCuentasPorCobrarForm";
             Text = "RazonDeCuentasPorCobrarForm";
@@ -166,9 +167,9 @@
         private TextBox textBox1;
         private Label label9;
         private Label label3;
-        private TextBox textBox9;
+        private TextBox RotacionDeCuentasPorCobrartxt;
         private Label label2;
-        private TextBox textBox7;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox Ventastxt;
+        private TextBox CuentasPorCobrartxt;
     }
 }

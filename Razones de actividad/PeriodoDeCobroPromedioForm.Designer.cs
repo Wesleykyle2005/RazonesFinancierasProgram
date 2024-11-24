@@ -33,10 +33,10 @@
             textBox1 = new TextBox();
             label9 = new Label();
             label3 = new Label();
-            textBox9 = new TextBox();
+            PeriodoPromedioDeCobrotxt = new TextBox();
             label2 = new Label();
-            textBox7 = new TextBox();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            CuentasPorCobrarTxt = new TextBox();
+            VentasTxt = new TextBox();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -98,14 +98,14 @@
             label3.TabIndex = 52;
             label3.Text = "Promedio de cobro promedio";
             // 
-            // textBox9
+            // PeriodoPromedioDeCobrotxt
             // 
-            textBox9.BorderStyle = BorderStyle.None;
-            textBox9.Location = new Point(300, 200);
-            textBox9.Multiline = true;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(100, 20);
-            textBox9.TabIndex = 49;
+            PeriodoPromedioDeCobrotxt.BorderStyle = BorderStyle.None;
+            PeriodoPromedioDeCobrotxt.Location = new Point(300, 200);
+            PeriodoPromedioDeCobrotxt.Multiline = true;
+            PeriodoPromedioDeCobrotxt.Name = "PeriodoPromedioDeCobrotxt";
+            PeriodoPromedioDeCobrotxt.Size = new Size(100, 20);
+            PeriodoPromedioDeCobrotxt.TabIndex = 49;
             // 
             // label2
             // 
@@ -118,25 +118,25 @@
             label2.TabIndex = 51;
             label2.Text = "Ventas anuales";
             // 
-            // textBox7
+            // CuentasPorCobrarTxt
             // 
-            textBox7.BorderStyle = BorderStyle.None;
-            textBox7.Location = new Point(200, 100);
-            textBox7.Margin = new Padding(0);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(100, 20);
-            textBox7.TabIndex = 47;
+            CuentasPorCobrarTxt.BorderStyle = BorderStyle.None;
+            CuentasPorCobrarTxt.Location = new Point(200, 100);
+            CuentasPorCobrarTxt.Margin = new Padding(0);
+            CuentasPorCobrarTxt.Multiline = true;
+            CuentasPorCobrarTxt.Name = "CuentasPorCobrarTxt";
+            CuentasPorCobrarTxt.Size = new Size(100, 20);
+            CuentasPorCobrarTxt.TabIndex = 47;
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // VentasTxt
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 48;
+            VentasTxt.BorderStyle = BorderStyle.None;
+            VentasTxt.Location = new Point(550, 100);
+            VentasTxt.Margin = new Padding(0);
+            VentasTxt.Multiline = true;
+            VentasTxt.Name = "VentasTxt";
+            VentasTxt.Size = new Size(100, 20);
+            VentasTxt.TabIndex = 48;
             // 
             // PeriodoDeCobroPromedioForm
             // 
@@ -149,10 +149,10 @@
             Controls.Add(textBox1);
             Controls.Add(label9);
             Controls.Add(label3);
-            Controls.Add(textBox9);
+            Controls.Add(PeriodoPromedioDeCobrotxt);
             Controls.Add(label2);
-            Controls.Add(textBox7);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(CuentasPorCobrarTxt);
+            Controls.Add(VentasTxt);
             FormBorderStyle = FormBorderStyle.None;
             Name = "PeriodoDeCobroPromedioForm";
             Text = "PeriodoDePagoPromedioForm";
@@ -168,9 +168,9 @@
         private TextBox textBox1;
         private Label label9;
         private Label label3;
-        private TextBox textBox9;
+        private TextBox PeriodoPromedioDeCobrotxt;
         private Label label2;
-        private TextBox textBox7;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox CuentasPorCobrarTxt;
+        private TextBox VentasTxt;
     }
 }
