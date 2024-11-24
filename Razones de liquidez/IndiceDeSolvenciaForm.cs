@@ -25,8 +25,8 @@ namespace RazonesFinancieras.Razones_de_liquidez
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
             // Inicializar las variables
-            int activoCirculante = 0;
-            int pasivoCirculante = 0;
+            Double activoCirculante = 0;
+            Double pasivoCirculante = 0;
 
             // Asignar valores iniciales a los TextBox
             ActivocirculanteTextbox.Text = activoCirculante.ToString();
@@ -36,11 +36,11 @@ namespace RazonesFinancieras.Razones_de_liquidez
             try
             {
                 // Parsear los valores de los TextBox
-                activoCirculante = int.Parse(ActivocirculanteTextbox.Text);
-                pasivoCirculante = int.Parse(PasivoCirculantetextBox.Text);
+                activoCirculante = Double.Parse(ActivocirculanteTextbox.Text);
+                pasivoCirculante = Double.Parse(PasivoCirculantetextBox.Text);
 
                 // Calcular y mostrar el resultado
-                int IndiceDeSolvencia = activoCirculante/pasivoCirculante;
+                Double IndiceDeSolvencia = activoCirculante / pasivoCirculante;
                 IndiceSolvenciatxtBox.Text = IndiceDeSolvencia.ToString();
             }
             catch (FormatException)
@@ -50,6 +50,19 @@ namespace RazonesFinancieras.Razones_de_liquidez
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
+            }
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ConclusionTextBox.Text))
+            {
+                Clipboard.SetText(ConclusionTextBox.Text);
+                MessageBox.Show("Contenido copiado al portapapeles.", "Copiar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

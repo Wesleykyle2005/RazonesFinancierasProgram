@@ -25,8 +25,8 @@ namespace RazonesFinancieras.Razones_de_liquidez
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
             // Inicializar las variables
-            int activoCirculante = 0;
-            int pasivoCirculante = 0;
+            Double activoCirculante = 0;
+            Double pasivoCirculante = 0;
 
             // Asignar valores iniciales a los TextBox
             ActivoCirculantetextBox.Text = activoCirculante.ToString();
@@ -36,11 +36,11 @@ namespace RazonesFinancieras.Razones_de_liquidez
             try
             {
                 // Parsear los valores de los TextBox
-                activoCirculante = int.Parse(ActivoCirculantetextBox.Text);
-                pasivoCirculante = int.Parse(PasivoCirculantetextBox.Text);
+                activoCirculante = Double.Parse(ActivoCirculantetextBox.Text);
+                pasivoCirculante = Double.Parse(PasivoCirculantetextBox.Text);
 
                 // Calcular y mostrar el resultado
-                int capitalDeTrabajoNeto = activoCirculante - pasivoCirculante;
+                Double capitalDeTrabajoNeto = activoCirculante - pasivoCirculante;
                 CapitalDeTrabajoNetotextBox.Text = capitalDeTrabajoNeto.ToString();
             }
             catch (FormatException)

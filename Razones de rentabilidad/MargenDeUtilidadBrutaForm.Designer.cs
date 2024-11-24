@@ -30,13 +30,15 @@
         {
             EvaluarButton = new Button();
             label4 = new Label();
-            textBox1 = new TextBox();
+            ConclusionTextBox = new TextBox();
             label9 = new Label();
             label3 = new Label();
-            textBox9 = new TextBox();
+            MargenDeUtilidadBrutaTextBox = new TextBox();
             label2 = new Label();
-            textBox7 = new TextBox();
-            PasivoCirculantetextBoxPasivoCirculantetextBox = new TextBox();
+            VentasTextBox = new TextBox();
+            CostoDeVentasTextBox = new TextBox();
+            button2 = new Button();
+            copyButton = new Button();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -53,6 +55,7 @@
             EvaluarButton.TabIndex = 37;
             EvaluarButton.Text = "Evaluar";
             EvaluarButton.UseVisualStyleBackColor = false;
+            EvaluarButton.Click += EvaluarButton_Click;
             // 
             // label4
             // 
@@ -65,15 +68,15 @@
             label4.TabIndex = 36;
             label4.Text = "Conclusion";
             // 
-            // textBox1
+            // ConclusionTextBox
             // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(0, 300);
-            textBox1.Margin = new Padding(0);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(700, 100);
-            textBox1.TabIndex = 35;
+            ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Location = new Point(0, 300);
+            ConclusionTextBox.Margin = new Padding(0);
+            ConclusionTextBox.Multiline = true;
+            ConclusionTextBox.Name = "ConclusionTextBox";
+            ConclusionTextBox.Size = new Size(700, 100);
+            ConclusionTextBox.TabIndex = 35;
             // 
             // label9
             // 
@@ -97,14 +100,15 @@
             label3.TabIndex = 34;
             label3.Text = "Margen de utilidad bruta";
             // 
-            // textBox9
+            // MargenDeUtilidadBrutaTextBox
             // 
-            textBox9.BorderStyle = BorderStyle.None;
-            textBox9.Location = new Point(300, 200);
-            textBox9.Multiline = true;
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(100, 20);
-            textBox9.TabIndex = 31;
+            MargenDeUtilidadBrutaTextBox.BackColor = Color.FromArgb(242, 193, 133);
+            MargenDeUtilidadBrutaTextBox.BorderStyle = BorderStyle.None;
+            MargenDeUtilidadBrutaTextBox.Location = new Point(300, 200);
+            MargenDeUtilidadBrutaTextBox.Multiline = true;
+            MargenDeUtilidadBrutaTextBox.Name = "MargenDeUtilidadBrutaTextBox";
+            MargenDeUtilidadBrutaTextBox.Size = new Size(100, 20);
+            MargenDeUtilidadBrutaTextBox.TabIndex = 31;
             // 
             // label2
             // 
@@ -117,25 +121,58 @@
             label2.TabIndex = 33;
             label2.Text = "Costos de ventas";
             // 
-            // textBox7
+            // VentasTextBox
             // 
-            textBox7.BorderStyle = BorderStyle.None;
-            textBox7.Location = new Point(200, 100);
-            textBox7.Margin = new Padding(0);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(100, 20);
-            textBox7.TabIndex = 29;
+            VentasTextBox.BackColor = Color.FromArgb(242, 193, 133);
+            VentasTextBox.BorderStyle = BorderStyle.None;
+            VentasTextBox.Location = new Point(200, 100);
+            VentasTextBox.Margin = new Padding(0);
+            VentasTextBox.Multiline = true;
+            VentasTextBox.Name = "VentasTextBox";
+            VentasTextBox.Size = new Size(100, 20);
+            VentasTextBox.TabIndex = 29;
             // 
-            // PasivoCirculantetextBoxPasivoCirculantetextBox
+            // CostoDeVentasTextBox
             // 
-            PasivoCirculantetextBoxPasivoCirculantetextBox.BorderStyle = BorderStyle.None;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Location = new Point(550, 100);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Margin = new Padding(0);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Multiline = true;
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Name = "PasivoCirculantetextBoxPasivoCirculantetextBox";
-            PasivoCirculantetextBoxPasivoCirculantetextBox.Size = new Size(100, 20);
-            PasivoCirculantetextBoxPasivoCirculantetextBox.TabIndex = 30;
+            CostoDeVentasTextBox.BackColor = Color.FromArgb(242, 193, 133);
+            CostoDeVentasTextBox.BorderStyle = BorderStyle.None;
+            CostoDeVentasTextBox.Location = new Point(550, 100);
+            CostoDeVentasTextBox.Margin = new Padding(0);
+            CostoDeVentasTextBox.Multiline = true;
+            CostoDeVentasTextBox.Name = "CostoDeVentasTextBox";
+            CostoDeVentasTextBox.Size = new Size(100, 20);
+            CostoDeVentasTextBox.TabIndex = 30;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(150, 150, 150);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button2.ForeColor = Color.Black;
+            button2.Location = new Point(500, 400);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(200, 30);
+            button2.TabIndex = 39;
+            button2.Text = "Guardar al informe final";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // copyButton
+            // 
+            copyButton.BackColor = Color.FromArgb(150, 150, 150);
+            copyButton.FlatAppearance.BorderSize = 0;
+            copyButton.FlatStyle = FlatStyle.Flat;
+            copyButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            copyButton.ForeColor = Color.Black;
+            copyButton.Location = new Point(0, 400);
+            copyButton.Margin = new Padding(0);
+            copyButton.Name = "copyButton";
+            copyButton.Size = new Size(200, 30);
+            copyButton.TabIndex = 38;
+            copyButton.Text = "Copiar al portapapeles";
+            copyButton.UseVisualStyleBackColor = false;
+            copyButton.Click += copyButton_Click;
             // 
             // MargenDeUtilidadBrutaForm
             // 
@@ -143,15 +180,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
+            Controls.Add(button2);
+            Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(ConclusionTextBox);
             Controls.Add(label9);
             Controls.Add(label3);
-            Controls.Add(textBox9);
+            Controls.Add(MargenDeUtilidadBrutaTextBox);
             Controls.Add(label2);
-            Controls.Add(textBox7);
-            Controls.Add(PasivoCirculantetextBoxPasivoCirculantetextBox);
+            Controls.Add(VentasTextBox);
+            Controls.Add(CostoDeVentasTextBox);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MargenDeUtilidadBrutaForm";
             Text = "MargenDeUtilidadBrutaForm";
@@ -163,12 +202,14 @@
         #endregion
         private Button EvaluarButton;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox ConclusionTextBox;
         private Label label9;
         private Label label3;
-        private TextBox textBox9;
+        private TextBox MargenDeUtilidadBrutaTextBox;
         private Label label2;
-        private TextBox textBox7;
-        private TextBox PasivoCirculantetextBoxPasivoCirculantetextBox;
+        private TextBox VentasTextBox;
+        private TextBox CostoDeVentasTextBox;
+        private Button button2;
+        private Button copyButton;
     }
 }

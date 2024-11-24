@@ -43,11 +43,11 @@
             // 
             // EvaluarButton
             // 
-            EvaluarButton.BackColor = Color.FromArgb(150, 150, 150);
+            EvaluarButton.BackColor = Color.Black;
             EvaluarButton.FlatAppearance.BorderSize = 0;
             EvaluarButton.FlatStyle = FlatStyle.Flat;
             EvaluarButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            EvaluarButton.ForeColor = Color.Black;
+            EvaluarButton.ForeColor = Color.White;
             EvaluarButton.Location = new Point(300, 270);
             EvaluarButton.Margin = new Padding(0);
             EvaluarButton.Name = "EvaluarButton";
@@ -173,6 +173,7 @@
             copyButton.TabIndex = 18;
             copyButton.Text = "Copiar al portapapeles";
             copyButton.UseVisualStyleBackColor = false;
+            copyButton.Click += copyButton_Click;
             // 
             // IndiceDeSolvenciaForm
             // 

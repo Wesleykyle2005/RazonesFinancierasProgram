@@ -30,13 +30,15 @@
         {
             EvaluarButton = new Button();
             label4 = new Label();
-            textBox1 = new TextBox();
+            ConclusionTextBox = new TextBox();
             label9 = new Label();
             label3 = new Label();
             RotacionInventariostxt = new TextBox();
             label2 = new Label();
             Costostxt = new TextBox();
             Inventariostxt = new TextBox();
+            button2 = new Button();
+            copyButton = new Button();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -66,15 +68,15 @@
             label4.TabIndex = 36;
             label4.Text = "Conclusion";
             // 
-            // textBox1
+            // ConclusionTextBox
             // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(0, 300);
-            textBox1.Margin = new Padding(0);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(700, 100);
-            textBox1.TabIndex = 35;
+            ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Location = new Point(0, 300);
+            ConclusionTextBox.Margin = new Padding(0);
+            ConclusionTextBox.Multiline = true;
+            ConclusionTextBox.Name = "ConclusionTextBox";
+            ConclusionTextBox.Size = new Size(700, 100);
+            ConclusionTextBox.TabIndex = 35;
             // 
             // label9
             // 
@@ -100,6 +102,7 @@
             // 
             // RotacionInventariostxt
             // 
+            RotacionInventariostxt.BackColor = Color.FromArgb(242, 193, 133);
             RotacionInventariostxt.BorderStyle = BorderStyle.None;
             RotacionInventariostxt.Location = new Point(300, 200);
             RotacionInventariostxt.Multiline = true;
@@ -120,6 +123,7 @@
             // 
             // Costostxt
             // 
+            Costostxt.BackColor = Color.FromArgb(242, 193, 133);
             Costostxt.BorderStyle = BorderStyle.None;
             Costostxt.Location = new Point(200, 100);
             Costostxt.Margin = new Padding(0);
@@ -130,6 +134,7 @@
             // 
             // Inventariostxt
             // 
+            Inventariostxt.BackColor = Color.FromArgb(242, 193, 133);
             Inventariostxt.BorderStyle = BorderStyle.None;
             Inventariostxt.Location = new Point(550, 100);
             Inventariostxt.Margin = new Padding(0);
@@ -138,15 +143,48 @@
             Inventariostxt.Size = new Size(100, 20);
             Inventariostxt.TabIndex = 30;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(150, 150, 150);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button2.ForeColor = Color.Black;
+            button2.Location = new Point(500, 400);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(200, 30);
+            button2.TabIndex = 87;
+            button2.Text = "Guardar al informe final";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // copyButton
+            // 
+            copyButton.BackColor = Color.FromArgb(150, 150, 150);
+            copyButton.FlatAppearance.BorderSize = 0;
+            copyButton.FlatStyle = FlatStyle.Flat;
+            copyButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            copyButton.ForeColor = Color.Black;
+            copyButton.Location = new Point(0, 400);
+            copyButton.Margin = new Padding(0);
+            copyButton.Name = "copyButton";
+            copyButton.Size = new Size(200, 30);
+            copyButton.TabIndex = 86;
+            copyButton.Text = "Copiar al portapapeles";
+            copyButton.UseVisualStyleBackColor = false;
+            copyButton.Click += copyButton_Click;
+            // 
             // RazonDeRotacionDeInventarioForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
+            Controls.Add(button2);
+            Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(ConclusionTextBox);
             Controls.Add(label9);
             Controls.Add(label3);
             Controls.Add(RotacionInventariostxt);
@@ -164,12 +202,14 @@
         #endregion
         private Button EvaluarButton;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox ConclusionTextBox;
         private Label label9;
         private Label label3;
         private TextBox RotacionInventariostxt;
         private Label label2;
         private TextBox Costostxt;
         private TextBox Inventariostxt;
+        private Button button2;
+        private Button copyButton;
     }
 }

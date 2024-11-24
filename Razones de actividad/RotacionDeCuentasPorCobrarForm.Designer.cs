@@ -30,13 +30,15 @@
         {
             EvaluarButton = new Button();
             label4 = new Label();
-            textBox1 = new TextBox();
+            ConclusionTextBox = new TextBox();
             label9 = new Label();
             label3 = new Label();
             RotacionDeCuentasPorCobrartxt = new TextBox();
             label2 = new Label();
             Ventastxt = new TextBox();
             CuentasPorCobrartxt = new TextBox();
+            button2 = new Button();
+            copyButton = new Button();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -66,15 +68,15 @@
             label4.TabIndex = 45;
             label4.Text = "Conclusion";
             // 
-            // textBox1
+            // ConclusionTextBox
             // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(0, 300);
-            textBox1.Margin = new Padding(0);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(700, 100);
-            textBox1.TabIndex = 44;
+            ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Location = new Point(0, 300);
+            ConclusionTextBox.Margin = new Padding(0);
+            ConclusionTextBox.Multiline = true;
+            ConclusionTextBox.Name = "ConclusionTextBox";
+            ConclusionTextBox.Size = new Size(700, 100);
+            ConclusionTextBox.TabIndex = 44;
             // 
             // label9
             // 
@@ -100,6 +102,7 @@
             // 
             // RotacionDeCuentasPorCobrartxt
             // 
+            RotacionDeCuentasPorCobrartxt.BackColor = Color.FromArgb(242, 193, 133);
             RotacionDeCuentasPorCobrartxt.BorderStyle = BorderStyle.None;
             RotacionDeCuentasPorCobrartxt.Location = new Point(300, 200);
             RotacionDeCuentasPorCobrartxt.Multiline = true;
@@ -120,6 +123,7 @@
             // 
             // Ventastxt
             // 
+            Ventastxt.BackColor = Color.FromArgb(242, 193, 133);
             Ventastxt.BorderStyle = BorderStyle.None;
             Ventastxt.Location = new Point(200, 100);
             Ventastxt.Margin = new Padding(0);
@@ -130,6 +134,7 @@
             // 
             // CuentasPorCobrartxt
             // 
+            CuentasPorCobrartxt.BackColor = Color.FromArgb(242, 193, 133);
             CuentasPorCobrartxt.BorderStyle = BorderStyle.None;
             CuentasPorCobrartxt.Location = new Point(550, 100);
             CuentasPorCobrartxt.Margin = new Padding(0);
@@ -138,15 +143,48 @@
             CuentasPorCobrartxt.Size = new Size(100, 20);
             CuentasPorCobrartxt.TabIndex = 39;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(150, 150, 150);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button2.ForeColor = Color.Black;
+            button2.Location = new Point(500, 400);
+            button2.Margin = new Padding(0);
+            button2.Name = "button2";
+            button2.Size = new Size(200, 30);
+            button2.TabIndex = 81;
+            button2.Text = "Guardar al informe final";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // copyButton
+            // 
+            copyButton.BackColor = Color.FromArgb(150, 150, 150);
+            copyButton.FlatAppearance.BorderSize = 0;
+            copyButton.FlatStyle = FlatStyle.Flat;
+            copyButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            copyButton.ForeColor = Color.Black;
+            copyButton.Location = new Point(0, 400);
+            copyButton.Margin = new Padding(0);
+            copyButton.Name = "copyButton";
+            copyButton.Size = new Size(200, 30);
+            copyButton.TabIndex = 80;
+            copyButton.Text = "Copiar al portapapeles";
+            copyButton.UseVisualStyleBackColor = false;
+            copyButton.Click += copyButton_Click;
+            // 
             // RazonDeCuentasPorCobrarForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
+            Controls.Add(button2);
+            Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(ConclusionTextBox);
             Controls.Add(label9);
             Controls.Add(label3);
             Controls.Add(RotacionDeCuentasPorCobrartxt);
@@ -164,12 +202,14 @@
 
         private Button EvaluarButton;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox ConclusionTextBox;
         private Label label9;
         private Label label3;
         private TextBox RotacionDeCuentasPorCobrartxt;
         private Label label2;
         private TextBox Ventastxt;
         private TextBox CuentasPorCobrartxt;
+        private Button button2;
+        private Button copyButton;
     }
 }

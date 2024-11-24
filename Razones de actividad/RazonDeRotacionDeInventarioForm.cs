@@ -25,8 +25,8 @@ namespace RazonesFinancieras.Razones_de_actividad
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
             // Inicializar las variables
-            int costos = 0;
-            int inventarios = 0;
+            Double costos = 0;
+            Double inventarios = 0;
 
             // Asignar valores iniciales a los TextBox
             Costostxt.Text = costos.ToString();
@@ -36,11 +36,11 @@ namespace RazonesFinancieras.Razones_de_actividad
             try
             {
                 // Parsear los valores de los TextBox
-                costos = int.Parse(Costostxt.Text);
-                inventarios = int.Parse(Inventariostxt.Text);
+                costos = Double.Parse(Costostxt.Text);
+                inventarios = Double.Parse(Inventariostxt.Text);
 
                 // Calcular y mostrar el resultado
-                int RotacionDeInventarios = costos/inventarios;
+                Double RotacionDeInventarios = costos / inventarios;
                 RotacionInventariostxt.Text = RotacionDeInventarios.ToString();
             }
             catch (FormatException)
@@ -50,6 +50,19 @@ namespace RazonesFinancieras.Razones_de_actividad
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
+            }
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ConclusionTextBox.Text))
+            {
+                Clipboard.SetText(ConclusionTextBox.Text);
+                MessageBox.Show("Contenido copiado al portapapeles.", "Copiar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

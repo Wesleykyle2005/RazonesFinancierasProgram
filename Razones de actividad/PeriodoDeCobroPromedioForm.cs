@@ -25,8 +25,8 @@ namespace RazonesFinancieras.Razones_de_actividad
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
             // Inicializar las variables
-            int ventas = 0;
-            int cuentasporcobrar = 0;
+            Double ventas = 0;
+            Double cuentasporcobrar = 0;
 
             // Asignar valores iniciales a los TextBox
             VentasTxt.Text = ventas.ToString();
@@ -36,11 +36,11 @@ namespace RazonesFinancieras.Razones_de_actividad
             try
             {
                 // Parsear los valores de los TextBox
-                cuentasporcobrar = int.Parse(CuentasPorCobrarTxt.Text);
-                ventas = int.Parse(VentasTxt.Text);
+                cuentasporcobrar = Double.Parse(CuentasPorCobrarTxt.Text);
+                ventas = Double.Parse(VentasTxt.Text);
 
                 // Calcular y mostrar el resultado
-                int periodopromediodecobro = cuentasporcobrar/(ventas/360);
+                Double periodopromediodecobro = cuentasporcobrar / (ventas / 360);
                 PeriodoPromedioDeCobrotxt.Text = periodopromediodecobro.ToString();
             }
             catch (FormatException)
@@ -50,6 +50,19 @@ namespace RazonesFinancieras.Razones_de_actividad
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
+            }
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ConclusionTextBox.Text))
+            {
+                Clipboard.SetText(ConclusionTextBox.Text);
+                MessageBox.Show("Contenido copiado al portapapeles.", "Copiar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
