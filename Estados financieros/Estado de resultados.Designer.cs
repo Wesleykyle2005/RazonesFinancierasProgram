@@ -28,20 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            EnviarCambiosButton = new Button();
+            ActualizarButton = new Button();
+            bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
+            dgvER = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvER).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // EnviarCambiosButton
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Calibri", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Black;
-            label1.Location = new Point(115, 173);
-            label1.Name = "label1";
-            label1.Size = new Size(440, 59);
-            label1.TabIndex = 2;
-            label1.Text = "Estado de resultados";
+            EnviarCambiosButton.BackColor = Color.FromArgb(150, 150, 150);
+            EnviarCambiosButton.FlatAppearance.BorderSize = 0;
+            EnviarCambiosButton.FlatStyle = FlatStyle.Flat;
+            EnviarCambiosButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            EnviarCambiosButton.ForeColor = Color.Black;
+            EnviarCambiosButton.Location = new Point(550, 70);
+            EnviarCambiosButton.Margin = new Padding(0);
+            EnviarCambiosButton.Name = "EnviarCambiosButton";
+            EnviarCambiosButton.Size = new Size(150, 30);
+            EnviarCambiosButton.TabIndex = 69;
+            EnviarCambiosButton.Text = "Enviar cambios";
+            EnviarCambiosButton.UseVisualStyleBackColor = false;
+            // 
+            // ActualizarButton
+            // 
+            ActualizarButton.BackColor = Color.FromArgb(150, 150, 150);
+            ActualizarButton.FlatAppearance.BorderSize = 0;
+            ActualizarButton.FlatStyle = FlatStyle.Flat;
+            ActualizarButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            ActualizarButton.ForeColor = Color.Black;
+            ActualizarButton.Location = new Point(0, 70);
+            ActualizarButton.Margin = new Padding(0);
+            ActualizarButton.Name = "ActualizarButton";
+            ActualizarButton.Size = new Size(100, 30);
+            ActualizarButton.TabIndex = 68;
+            ActualizarButton.Text = "Actualizar";
+            ActualizarButton.UseVisualStyleBackColor = false;
+            ActualizarButton.Click += ActualizarButton_Click;
+            // 
+            // bigLabel1
+            // 
+            bigLabel1.BackColor = Color.Transparent;
+            bigLabel1.Font = new Font("Arial Black", 20F, FontStyle.Bold);
+            bigLabel1.ForeColor = Color.Black;
+            bigLabel1.Location = new Point(0, 0);
+            bigLabel1.Margin = new Padding(0);
+            bigLabel1.Name = "bigLabel1";
+            bigLabel1.Size = new Size(350, 45);
+            bigLabel1.TabIndex = 70;
+            bigLabel1.Text = "Estado de resultados\r\n";
+            // 
+            // dgvER
+            // 
+            dgvER.BackgroundColor = Color.White;
+            dgvER.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvER.Dock = DockStyle.Bottom;
+            dgvER.GridColor = Color.Black;
+            dgvER.Location = new Point(0, 100);
+            dgvER.Name = "dgvER";
+            dgvER.Size = new Size(700, 350);
+            dgvER.TabIndex = 71;
             // 
             // Estado_de_resultados
             // 
@@ -49,17 +95,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
-            Controls.Add(label1);
+            Controls.Add(dgvER);
+            Controls.Add(bigLabel1);
+            Controls.Add(EnviarCambiosButton);
+            Controls.Add(ActualizarButton);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Estado_de_resultados";
             Text = "Estado_de_resultados";
             Load += Estado_de_resultados_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvER).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Button EnviarCambiosButton;
+        private Button ActualizarButton;
+        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private DataGridView dgvER;
     }
 }
