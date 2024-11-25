@@ -1,15 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Configuration;
-using RazonesFinancieras.Models;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace RazonesFinancieras.Estados_financieros
 {
@@ -18,81 +14,177 @@ namespace RazonesFinancieras.Estados_financieros
         public Estado_de_resultados()
         {
             InitializeComponent();
+            EnableDoubleBuffering(tlpER);
+
+            // Ajustar el tamaño de panel1 cuando el formulario cambie de tamaño
+            this.Resize += (s, e) => AdjustPanelHeight();
+            AdjustPanelHeight();
         }
 
         private void Estado_de_resultados_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
+            LoadCuentasToTextBox("Ventas");
+            LoadCuentasToTextBox("Costos");
+            LoadCuentasToTextBox("Gastos");
+
         }
 
-
+        private void EnableDoubleBuffering(TableLayoutPanel tableLayoutPanel)
+        {
+            typeof(TableLayoutPanel).InvokeMember("DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null, tableLayoutPanel, new object[] { true });
+        }
 
         string sqlServerConnectionString = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
-        public IEnumerable<Venta> GetAll()
+
+        // Método general para obtener cuentas desde cualquier tabla
+        public IEnumerable<(string NombreCuenta, decimal Valor)> GetCuentas(string tableName)
         {
-            var ventas = new List<Venta>(); // Usamos var para simplificar
+            var cuentas = new List<(string NombreCuenta, decimal Valor)>();
 
             try
             {
                 using (var connection = new SqlConnection(sqlServerConnectionString))
                 {
                     connection.Open();
-                    using (var command = new SqlCommand("SELECT * FROM Ventas", connection))
+                    string query = $"SELECT NombreCuenta, Valor FROM {tableName}";
+                    using (var command = new SqlCommand(query, connection))
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            // Validamos columnas para evitar errores con valores nulos.
-                            var venta = new Venta
-                            {
-                                NombreCuenta = reader["NombreCuenta"]?.ToString() ?? "Sin nombre", // Valor por defecto si es nulo
-                                Clasificacion = reader["Clasificacion"]?.ToString() ?? "Sin clasificacion", // Valor por defecto si es nulo
-                                Valor = reader["Valor"] != DBNull.Value
-                                    ? Convert.ToDecimal(reader["Valor"])
-                                    : 0m // Valor por defecto si es nulo
-                            };
-                            ventas.Add(venta);
+                            var nombreCuenta = reader["NombreCuenta"]?.ToString() ?? "Sin nombre";
+                            var valor = reader["Valor"] != DBNull.Value
+                                ? Convert.ToDecimal(reader["Valor"])
+                                : 0m;
+                            cuentas.Add((nombreCuenta, valor));
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Muestra el error en consola o MessageBox según el contexto
-                Console.WriteLine($"Error al obtener las ventas: {ex.Message}");
-                MessageBox.Show($"Error al obtener las ventas: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al obtener las cuentas de la tabla {tableName}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return ventas;
+            return cuentas;
         }
 
-
-        private void LoadDataToDataGridView()
+        private void LoadCuentasToTextBox(string tableName)
         {
             try
             {
-                var ventas = GetAll();
-                
-                dgvER.DataSource = ventas.ToList();
-                dgvER.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dgvER.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                dgvER.Dock= DockStyle.Bottom;
-                dgvER.ForeColor= Color.Black;
-                int Hdgv = (int)(MdiParent.Height / 1.4); 
-                dgvER.Height = Hdgv;
-                dgvER.Columns["Valor"].DefaultCellStyle.Format = "C2";
+                ClearTextBoxes(); // Limpiar todos los TextBox antes de cargar datos
+                var cuentas = GetCuentas(tableName);
 
+                foreach (var cuenta in cuentas)
+                {
+                    if (cuenta.NombreCuenta == "Ventas")
+                        VentasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Descuentos sobre ventas")
+                        DescuentosSobreVentasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Devoluciones sobre ventas")
+                        DevolucionesSobreVentasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Inventario Inicial")
+                        InventarioInicialTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Compras")
+                        ComprasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Mas Gastos de compras")
+                        GastosDeComprasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Menos descuentos sobre Compra")
+                        DescuentosSobreCompraTextBox.Text = cuenta.Valor.ToString("N2");
+                    /*else if (cuenta.NombreCuenta == "Inventario Final")
+                        InventarioFinalTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Sueldos y comisiones a vendedores")
+                        SueldosComisionesVendedoresTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Sueldos de la oficina de ventas")
+                        SueldosOficinaVentasTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Viáticos")
+                        ViaticosTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Fletes de mercancía remitidas")
+                        FletesMercanciaRemitidaTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Depreciación del equipo de transporte")
+                        DepreciacionEquipoTransporteTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Teléfono")
+                        TelefonoTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Sueldos de oficina")
+                        SueldosOficinaTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Servicios públicos")
+                        ServiciosPublicosTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Depreciación del edificio")
+                        DepreciacionEdificioTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Depreciación del equipo de oficina")
+                        DepreciacionEquipoOficinaTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Dividendos cobrados")
+                        DividendosCobradosTextBox.Text = cuenta.Valor.ToString("N2");
+                    else if (cuenta.NombreCuenta == "Impuestos a la utilidad")
+                        ImpuestosUtilidadTextBox.Text = cuenta.Valor.ToString("N2");*/
+                }
 
+                // Validar y convertir los valores antes de realizar operaciones
+                double descuentosSobreVentas = 0;
+                double devolucionesSobreVentas = 0;
+                double ventasNetas = 0;
+                double ventas = 0;
+
+                // Verificar si el valor de cada TextBox es numérico y convertirlo
+                if (!string.IsNullOrEmpty(DescuentosSobreVentasTextBox.Text) &&
+                    double.TryParse(DescuentosSobreVentasTextBox.Text, out double tempDescuentos))
+                {
+                    descuentosSobreVentas = tempDescuentos;
+                }
+
+                if (!string.IsNullOrEmpty(DevolucionesSobreVentasTextBox.Text) &&
+                    double.TryParse(DevolucionesSobreVentasTextBox.Text, out double tempDevoluciones))
+                {
+                    devolucionesSobreVentas = tempDevoluciones;
+                }
+                if (!string.IsNullOrEmpty(VentasTextBox.Text) &&
+                    double.TryParse(VentasTextBox.Text, out double tempVentas))
+                {
+                    ventas = tempVentas;
+                }
+
+                // Calcular la sumatoria
+                double sumatoriaDevolucionesDescuentos = descuentosSobreVentas + devolucionesSobreVentas;
+                SumatoriaDevolucionesDescuentosTextBox.Text = sumatoriaDevolucionesDescuentos.ToString("N2");
+
+                ventasNetas=ventas- sumatoriaDevolucionesDescuentos;
+                VentasNetasTextBox.Text = ventasNetas.ToString("N2");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar los datos en el DataGridView: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al cargar los datos en los TextBox: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private void ClearTextBoxes()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Text = string.Empty;
+                }
             }
         }
 
         private void ActualizarButton_Click(object sender, EventArgs e)
         {
-            LoadDataToDataGridView();
+            LoadCuentasToTextBox("Ventas"); // Cambiar el nombre de la tabla según corresponda
+        }
+
+        private void AdjustPanelHeight()
+        {
+            if (panel1 != null && this.MdiParent != null)
+            {
+                int newHeight = (int)(this.MdiParent.Height / 1.5);
+                panel1.Height = newHeight;
+            }
         }
     }
 }
