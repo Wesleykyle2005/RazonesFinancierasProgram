@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace RazonesFinancieras.Razones_de_endeudamiento
 {
@@ -27,31 +29,75 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
             Double pasivoALargoPlazo = 0;
             Double capitalSocial = 0;
 
-            // Asignar valores iniciales a los TextBox
-
-            PasivoALargoPlazotextBox.Text = pasivoALargoPlazo.ToString();
-            CapitalSocialTextBox.Text = capitalSocial.ToString();
-
-            // Calcular el Capital de Trabajo Neto
+            // Conexión a la base de datos
+            string SqlServerConnection = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString; // Reemplaza con tu cadena de conexión
+            string query = @"
+    SELECT 
+    SUM(CASE WHEN CE.TipoCuenta = 'Pasivos' AND P.Clasificacion = 'Pasivo Largo Plazo' THEN P.Valor ELSE 0 END) AS TotalPasivoLargoPlazo,
+    SUM(CASE WHEN CE.TipoCuenta = 'Capital' THEN C.Valor ELSE 0 END) AS TotalCapitalSocial
+FROM CuentaEmpresa CE
+JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+LEFT JOIN Pasivos P ON CE.TipoCuenta = 'Pasivos' AND CE.IdCuenta = P.IdPasivo
+LEFT JOIN Capital C ON CE.TipoCuenta = 'Capital' AND CE.IdCuenta = C.IdCapital
+WHERE E.IdEmpresa = @IdEmpresa
+GROUP BY E.IdEmpresa";
             try
             {
-                // Parsear los valores de los TextBox
-                pasivoALargoPlazo = Double.Parse(PasivoALargoPlazotextBox.Text);
-                capitalSocial = Double.Parse(CapitalSocialTextBox.Text);
+                // Establecer la conexión con la base de datos
+                using (SqlConnection conn = new SqlConnection(SqlServerConnection))
+                {
+                    conn.Open();
 
-                // Calcular y mostrar el resultado
-                Double razonDePasivoACapital = pasivoALargoPlazo / capitalSocial;
-                RazonDePasivoACapitalTextBox.Text = razonDePasivoACapital.ToString();
+                    // Crear el comando SQL con el parámetro de la empresa
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdEmpresa", 1); // Reemplaza con el ID de la empresa adecuada
+
+                        // Ejecutar la consulta y leer los resultados
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            // Leer el primer registro
+                            if (reader.Read())
+                            {
+                                // Asignar valores a las variables de pasivo largo plazo y capital social
+                                pasivoALargoPlazo = reader.IsDBNull(0) ? 0 : Convert.ToDouble(reader.GetDecimal(0)); // Total Pasivo Largo Plazo
+                                capitalSocial = reader.IsDBNull(1) ? 0 : Convert.ToDouble(reader.GetDecimal(1)); // Total Capital Social
+                            }
+                        }
+                    }
+                }
+
+                // Asignar los valores de los pasivos y el capital social a los TextBox
+                PasivoALargoPlazotextBox.Text = pasivoALargoPlazo.ToString("F2");
+                CapitalSocialTextBox.Text = capitalSocial.ToString("F2");
+
+                // Calcular la razón de pasivo a capital
+                Double razonDePasivoACapital = 0;
+
+                if (capitalSocial != 0)
+                {
+                    razonDePasivoACapital = pasivoALargoPlazo / capitalSocial;
+                    RazonDePasivoACapitalTextBox.Text = razonDePasivoACapital.ToString("F2");
+                }
+                else
+                {
+                    MessageBox.Show("El capital social no puede ser cero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (FormatException)
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos.", "Error de Formato");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Error de base de datos: {sqlEx.Message}", "Error de Base de Datos");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
             }
         }
+
 
         private void copyButton_Click(object sender, EventArgs e)
         {

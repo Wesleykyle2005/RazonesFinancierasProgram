@@ -9,7 +9,6 @@ namespace RazonesFinancieras
     public partial class Home : Form
     {
 
-        BalanceGeneral BalanceGeneral;
         Estado_de_resultados EstadoDeResultados;
         CapitalDeTrabajoNetoForm CapitalDeTrabajoNeto;
         IndiceDeSolvenciaForm IndiceDeSolvencia;
@@ -150,10 +149,7 @@ namespace RazonesFinancieras
         }
 
         // Botón para abrir Balance General
-        private void BalanceGeneralButton_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(BalanceGeneral, new BalanceGeneral());
-        }
+       
 
         // Botón para abrir Estado de Resultados
         private void EstadoDeResultadosButton_Click(object sender, EventArgs e)

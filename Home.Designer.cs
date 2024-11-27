@@ -35,7 +35,6 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             MenuContainerEstadosFinancieros = new Panel();
             EstadoDeResultadosButton = new Button();
-            BalanceGeneralButton = new Button();
             iconButtonEstadosFinancieros = new FontAwesome.Sharp.IconButton();
             MenuContainerLiquidez = new Panel();
             PruebaRapidaButton = new Button();
@@ -137,7 +136,6 @@
             // 
             MenuContainerEstadosFinancieros.BackColor = Color.FromArgb(59, 55, 64);
             MenuContainerEstadosFinancieros.Controls.Add(EstadoDeResultadosButton);
-            MenuContainerEstadosFinancieros.Controls.Add(BalanceGeneralButton);
             MenuContainerEstadosFinancieros.Controls.Add(iconButtonEstadosFinancieros);
             MenuContainerEstadosFinancieros.Dock = DockStyle.Top;
             MenuContainerEstadosFinancieros.Location = new Point(0, 0);
@@ -154,31 +152,14 @@
             EstadoDeResultadosButton.FlatStyle = FlatStyle.Flat;
             EstadoDeResultadosButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             EstadoDeResultadosButton.ForeColor = Color.FromArgb(187, 232, 242);
-            EstadoDeResultadosButton.Location = new Point(0, 55);
+            EstadoDeResultadosButton.Location = new Point(0, 30);
             EstadoDeResultadosButton.Name = "EstadoDeResultadosButton";
             EstadoDeResultadosButton.Size = new Size(300, 25);
             EstadoDeResultadosButton.TabIndex = 5;
-            EstadoDeResultadosButton.Text = "Estado de resultados";
+            EstadoDeResultadosButton.Text = "Cuentas";
             EstadoDeResultadosButton.TextAlign = ContentAlignment.MiddleLeft;
             EstadoDeResultadosButton.UseVisualStyleBackColor = false;
             EstadoDeResultadosButton.Click += EstadoDeResultadosButton_Click;
-            // 
-            // BalanceGeneralButton
-            // 
-            BalanceGeneralButton.BackColor = Color.FromArgb(59, 55, 64);
-            BalanceGeneralButton.Dock = DockStyle.Top;
-            BalanceGeneralButton.FlatAppearance.BorderSize = 0;
-            BalanceGeneralButton.FlatStyle = FlatStyle.Flat;
-            BalanceGeneralButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            BalanceGeneralButton.ForeColor = Color.FromArgb(187, 232, 242);
-            BalanceGeneralButton.Location = new Point(0, 30);
-            BalanceGeneralButton.Name = "BalanceGeneralButton";
-            BalanceGeneralButton.Size = new Size(300, 25);
-            BalanceGeneralButton.TabIndex = 4;
-            BalanceGeneralButton.Text = "Balance general";
-            BalanceGeneralButton.TextAlign = ContentAlignment.MiddleLeft;
-            BalanceGeneralButton.UseVisualStyleBackColor = false;
-            BalanceGeneralButton.Click += BalanceGeneralButton_Click;
             // 
             // iconButtonEstadosFinancieros
             // 
@@ -198,8 +179,9 @@
             iconButtonEstadosFinancieros.Name = "iconButtonEstadosFinancieros";
             iconButtonEstadosFinancieros.Size = new Size(300, 30);
             iconButtonEstadosFinancieros.TabIndex = 10;
-            iconButtonEstadosFinancieros.Text = "      Estados financieros";
+            iconButtonEstadosFinancieros.Text = "      Administrar cuentas";
             iconButtonEstadosFinancieros.TextAlign = ContentAlignment.MiddleLeft;
+            iconButtonEstadosFinancieros.TextImageRelation = TextImageRelation.ImageAboveText;
             iconButtonEstadosFinancieros.UseVisualStyleBackColor = false;
             iconButtonEstadosFinancieros.Click += iconButtonEstadosFinancieros_Click;
             // 
@@ -675,7 +657,6 @@
         private FontAwesome.Sharp.IconButton iconButtonRazonRentabilidad;
         private Panel MenuContainerEstadosFinancieros;
         private Button EstadoDeResultadosButton;
-        private Button BalanceGeneralButton;
         private FontAwesome.Sharp.IconButton iconButtonEstadosFinancieros;
         private System.Windows.Forms.Timer MenuEstadosFinancieros;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
