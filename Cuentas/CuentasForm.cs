@@ -14,7 +14,8 @@ namespace RazonesFinancieras.Estados_financieros
         int idEmpresa = 1;
         public Estado_de_resultados()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            EnableDoubleBuffering(dgvCuentas);
             int idEmpresa = 1;
             LoadData(idEmpresa);
             dgvCuentas.ForeColor = System.Drawing.Color.Black;
@@ -23,11 +24,11 @@ namespace RazonesFinancieras.Estados_financieros
             dgvCuentas.Columns["NombreCuenta"].ReadOnly = true;
             dgvCuentas.Columns["Clasificacion"].ReadOnly = true;
             dgvCuentas.Columns["Valor"].ReadOnly = false;
-
+            
 
 
         }
-
+        string sqlServerConnectionString = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
 
         private void LoadData(int idEmpresa)
         {
@@ -92,23 +93,12 @@ namespace RazonesFinancieras.Estados_financieros
             txtValor.Clear();
         }
 
-
-
-
-
-
-
-
-
-
-        private void EnableDoubleBuffering(TableLayoutPanel tableLayoutPanel)
+        private void EnableDoubleBuffering(Control control)
         {
-            typeof(TableLayoutPanel).InvokeMember("DoubleBuffered",
+            typeof(Control).InvokeMember("DoubleBuffered",
                 BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                null, tableLayoutPanel, new object[] { true });
+                null, control, new object[] { true });
         }
-
-        string sqlServerConnectionString = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
 
         private void EnviarCambiosButton_Click(object sender, EventArgs e)
         {
@@ -120,9 +110,6 @@ namespace RazonesFinancieras.Estados_financieros
         {
             LoadData(1);
         }
-
-        
-
         private void AddCuenta_Click(object sender, EventArgs e)
         {
             try
