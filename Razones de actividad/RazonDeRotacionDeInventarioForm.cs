@@ -31,7 +31,7 @@ namespace RazonesFinancieras.Razones_de_actividad
 
             // Cadena de conexión (ajusta según tu servidor y autenticación)
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
-            string queryCostos = "SELECT SUM(Valor) FROM Costos WHERE Clasificacion = 'Compras';";
+            string queryCostos = "SELECT SUM(Valor) \r\nFROM Costos \r\nWHERE Clasificacion IN ('Compras', 'Descuentos');";
             string queryInventarios = "SELECT SUM(Valor) FROM Activos WHERE Clasificacion = 'Activo Circulante' AND NombreCuenta = 'Inventarios';";
 
             try

@@ -38,7 +38,7 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
     FROM CuentaEmpresa CE
     JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
     LEFT JOIN Ventas I ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = I.IdVenta
-    LEFT JOIN Gastos G ON CE.TipoCuenta = 'Gastos' AND CE.IdCuenta = G.IdGasto
+    LEFT JOIN Gastos G ON CE.TipoCuenta = 'Intereses' AND CE.IdCuenta = G.IdGasto
     WHERE E.IdEmpresa = 1
     GROUP BY E.IdEmpresa";
 

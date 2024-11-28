@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,35 +25,79 @@ namespace RazonesFinancieras.Razones_de_actividad
 
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
-
             // Inicializar las variables
-            Double ventas = 0;
-            Double activostotales = 0;
+            double ventas = 0;
+            double activostotales = 0;
 
-            // Asignar valores iniciales a los TextBox
-            Ventastxt.Text = ventas.ToString();
-            ACtivosTotalestxt.Text = activostotales.ToString();
-
-            // Calcular el Capital de Trabajo Neto
             try
             {
-                // Parsear los valores de los TextBox
-                activostotales = Double.Parse(ACtivosTotalestxt.Text);
-                ventas = Double.Parse(Ventastxt.Text);
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
+                // Conexión a la base de datos
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
-                // Calcular y mostrar el resultado
-                Double rotaciondeactivostotales = ventas / activostotales;
-                RotacionDeActivosTotalestxt.Text = rotaciondeactivostotales.ToString();
+                    // Consulta SQL para obtener las Ventas y Activos Totales
+                    string query = @"
+            SELECT 
+                SUM(CASE WHEN CE.TipoCuenta = 'Ventas' AND V.NombreCuenta = 'Ventas' THEN V.Valor ELSE 0 END) AS TotalVentas,
+                SUM(CASE WHEN CE.TipoCuenta = 'Activos' THEN A.Valor ELSE 0 END) AS TotalActivos
+            FROM CuentaEmpresa CE
+            JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+            LEFT JOIN Ventas V ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = V.IdVenta
+            LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
+            WHERE E.IdEmpresa = 1
+            GROUP BY E.IdEmpresa;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        // Ejecutar la consulta
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Asignar los valores obtenidos desde la base de datos
+                                ventas = reader["TotalVentas"] != DBNull.Value ? Convert.ToDouble(reader["TotalVentas"]) : 0;
+                                activostotales = reader["TotalActivos"] != DBNull.Value ? Convert.ToDouble(reader["TotalActivos"]) : 0;
+
+                                // Mostrar los valores en los TextBox
+                                Ventastxt.Text = ventas.ToString("N2");
+                                ACtivosTotalestxt.Text = activostotales.ToString("N2");
+
+                                // Calcular y mostrar la rotación de activos totales
+                                if (activostotales != 0)
+                                {
+                                    double rotaciondeactivostotales = ventas / activostotales;
+                                    RotacionDeActivosTotalestxt.Text = rotaciondeactivostotales.ToString("N2");
+                                }
+                                else
+                                {
+                                    RotacionDeActivosTotalestxt.Text = "N/A";
+                                    MessageBox.Show("Los activos totales no pueden ser cero para este cálculo.", "Advertencia");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontraron datos para la empresa especificada.", "Sin datos");
+                            }
+                        }
+                    }
+                }
             }
             catch (FormatException)
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos.", "Error de Formato");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Error al acceder a la base de datos: {sqlEx.Message}", "Error SQL");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
             }
         }
+
 
         private void copyButton_Click(object sender, EventArgs e)
         {

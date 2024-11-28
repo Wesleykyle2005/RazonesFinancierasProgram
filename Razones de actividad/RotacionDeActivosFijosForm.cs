@@ -41,18 +41,18 @@ namespace RazonesFinancieras.Razones_de_actividad
                     // Consulta SQL para obtener las Ventas y Activos Fijos
                     string query = @"
                 SELECT 
-                    SUM(CASE WHEN CE.TipoCuenta = 'Ventas' THEN V.Valor ELSE 0 END) AS TotalVentas,
-                    SUM(CASE 
-                        WHEN CE.TipoCuenta = 'Activos' AND A.Clasificacion = 'Activo No Circulante' AND A.NombreCuenta = 'Inmuebles Maquinaria y Equipo' 
-                        THEN A.Valor 
-                        ELSE 0 
-                    END) AS TotalActivosFijos
-                FROM CuentaEmpresa CE
-                JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
-                LEFT JOIN Ventas V ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = V.IdVenta
-                LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
-                WHERE E.IdEmpresa = 1
-                GROUP BY E.IdEmpresa;";
+    SUM(CASE WHEN CE.TipoCuenta = 'Ventas' AND  v.NombreCuenta='Ventas' THEN V.Valor ELSE 0 END) AS TotalVentas,
+    SUM(CASE 
+        WHEN CE.TipoCuenta = 'Activos' AND A.Clasificacion = 'Activo No Circulante'  
+        THEN A.Valor 
+        ELSE 0 
+    END) AS TotalActivosFijos
+            FROM CuentaEmpresa CE
+            JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+            LEFT JOIN Ventas V ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = V.IdVenta
+            LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
+            WHERE E.IdEmpresa = 1
+            GROUP BY E.IdEmpresa;";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {

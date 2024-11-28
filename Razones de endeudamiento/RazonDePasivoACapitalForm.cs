@@ -38,8 +38,8 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
 FROM CuentaEmpresa CE
 JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
 LEFT JOIN Pasivos P ON CE.TipoCuenta = 'Pasivos' AND CE.IdCuenta = P.IdPasivo
-LEFT JOIN Capital C ON CE.TipoCuenta = 'Capital' AND CE.IdCuenta = C.IdCapital
-WHERE E.IdEmpresa = @IdEmpresa
+LEFT JOIN Capital C ON C.NombreCuenta = 'Capital Social' AND CE.IdCuenta = C.IdCapital
+WHERE E.IdEmpresa = 1
 GROUP BY E.IdEmpresa";
             try
             {
