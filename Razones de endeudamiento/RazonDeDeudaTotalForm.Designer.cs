@@ -39,6 +39,8 @@
             ActivosTotalesTextBox = new TextBox();
             button2 = new Button();
             copyButton = new Button();
+            label5 = new Label();
+            txtPromedioDeLaIndustria = new TextBox();
             SuspendLayout();
             // 
             // EvaluarButton
@@ -71,6 +73,7 @@
             // ConclusionTextBox
             // 
             ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             ConclusionTextBox.Location = new Point(0, 300);
             ConclusionTextBox.Margin = new Padding(0);
             ConclusionTextBox.Multiline = true;
@@ -174,12 +177,37 @@
             copyButton.UseVisualStyleBackColor = false;
             copyButton.Click += copyButton_Click;
             // 
+            // label5
+            // 
+            label5.BackColor = Color.FromArgb(150, 150, 150);
+            label5.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(400, 200);
+            label5.Name = "label5";
+            label5.Size = new Size(150, 40);
+            label5.TabIndex = 81;
+            label5.Text = "Promedio de la industria";
+            // 
+            // txtPromedioDeLaIndustria
+            // 
+            txtPromedioDeLaIndustria.BackColor = Color.FromArgb(242, 193, 133);
+            txtPromedioDeLaIndustria.BorderStyle = BorderStyle.None;
+            txtPromedioDeLaIndustria.Location = new Point(550, 200);
+            txtPromedioDeLaIndustria.Margin = new Padding(0);
+            txtPromedioDeLaIndustria.Multiline = true;
+            txtPromedioDeLaIndustria.Name = "txtPromedioDeLaIndustria";
+            txtPromedioDeLaIndustria.ReadOnly = true;
+            txtPromedioDeLaIndustria.Size = new Size(100, 20);
+            txtPromedioDeLaIndustria.TabIndex = 80;
+            // 
             // RazonDeDeudaTotalForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(187, 232, 242);
             ClientSize = new Size(700, 450);
+            Controls.Add(label5);
+            Controls.Add(txtPromedioDeLaIndustria);
             Controls.Add(button2);
             Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
@@ -212,5 +240,7 @@
         private TextBox ActivosTotalesTextBox;
         private Button button2;
         private Button copyButton;
+        private Label label5;
+        private TextBox txtPromedioDeLaIndustria;
     }
 }
