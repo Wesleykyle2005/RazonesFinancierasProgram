@@ -1,6 +1,6 @@
 -- Crear la base de datos
-CREATE DATABASE BalanceFinancieroDB1;
-USE BalanceFinancieroDB1;
+CREATE DATABASE FinanzasDB;
+USE FinanzasDB;
 
 -- Crear tabla Empresa
 CREATE TABLE Empresa (
@@ -141,6 +141,11 @@ INSERT INTO OtrosIngresos (NombreCuenta, Clasificacion, Valor)
 VALUES
 ('Dividendos cobrados', 'Ingresos Financieros', 2728.00);
 
+
+
+
+
+
 -- Relacionar todas las cuentas con Empresa ABC (IdEmpresa = 1)
 -- Activos
 INSERT INTO CuentaEmpresa (IdEmpresa, IdCuenta, TipoCuenta)
@@ -241,7 +246,7 @@ RETURN
 ---
 
 
-ALTER PROCEDURE spActualizarCuenta
+CREATE PROCEDURE spActualizarCuenta
     @TipoCuenta NVARCHAR(50),
     @NombreCuenta NVARCHAR(100),
     @Clasificacion NVARCHAR(50),

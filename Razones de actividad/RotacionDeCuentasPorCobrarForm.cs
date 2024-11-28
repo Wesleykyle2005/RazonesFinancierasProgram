@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,26 +28,80 @@ namespace RazonesFinancieras.Razones_de_actividad
             Ventastxt.Text = ventas.ToString();
             CuentasPorCobrartxt.Text = cuentasporcobrar.ToString();
 
-            // Calcular el Capital de Trabajo Neto
             try
             {
-                // Parsear los valores de los TextBox
-                cuentasporcobrar = Double.Parse(CuentasPorCobrartxt.Text);
-                ventas = Double.Parse(Ventastxt.Text);
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
 
-                // Calcular y mostrar el resultado
-                Double rotaciondecuentasporcobrar = ventas / cuentasporcobrar;
-                RotacionDeCuentasPorCobrartxt.Text = rotaciondecuentasporcobrar.ToString();
+                // Conexión a la base de datos
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Consulta SQL para obtener las Ventas y Cuentas por Cobrar
+                    string query = @"
+                SELECT 
+
+    SUM(CASE WHEN CE.TipoCuenta = 'Ventas' AND A.NombreCuenta = 'Ventas al credito' THEN V.Valor ELSE 0 END) AS TotalVentas,
+    
+    SUM(CASE WHEN CE.TipoCuenta = 'Activos' AND A.Clasificacion = 'Activo Circulante' AND A.NombreCuenta = 'Cuentas por Cobrar' THEN A.Valor ELSE 0 END) AS TotalCuentasPorCobrar
+FROM CuentaEmpresa CE
+JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+LEFT JOIN Ventas V ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = V.IdVenta
+LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
+WHERE E.IdEmpresa = 1
+GROUP BY E.IdEmpresa;
+
+";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        // Ejecutar la consulta
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Asignar los valores obtenidos desde la base de datos
+                                ventas = reader["TotalVentas"] != DBNull.Value ? Convert.ToDouble(reader["TotalVentas"]) : 0;
+                                cuentasporcobrar = reader["TotalCuentasPorCobrar"] != DBNull.Value ? Convert.ToDouble(reader["TotalCuentasPorCobrar"]) : 0;
+
+                                // Mostrar los valores en los TextBox
+                                Ventastxt.Text = ventas.ToString("N2");
+                                CuentasPorCobrartxt.Text = cuentasporcobrar.ToString("N2");
+
+                                // Calcular y mostrar la rotación de cuentas por cobrar
+                                if (cuentasporcobrar != 0)
+                                {
+                                    double rotacionDeCuentasPorCobrar = ventas / cuentasporcobrar;
+                                    RotacionDeCuentasPorCobrartxt.Text = rotacionDeCuentasPorCobrar.ToString("N2");
+                                }
+                                else
+                                {
+                                    RotacionDeCuentasPorCobrartxt.Text = "N/A";
+                                    MessageBox.Show("Las cuentas por cobrar no pueden ser cero para este cálculo.", "Advertencia");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontraron datos para la empresa especificada.", "Sin datos");
+                            }
+                        }
+                    }
+                }
             }
             catch (FormatException)
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos.", "Error de Formato");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Error al acceder a la base de datos: {sqlEx.Message}", "Error SQL");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
             }
         }
+
 
         private void copyButton_Click(object sender, EventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,32 +27,86 @@ namespace RazonesFinancieras.Razones_de_rentabilidad
         {
             // Inicializar las variables
             Double ventas = 0;
-            Double CostoDeVentas = 0;
+            Double costoDeVentas = 0;
 
             // Asignar valores iniciales a los TextBox
             VentasTextBox.Text = ventas.ToString();
-            CostoDeVentasTextBox.Text = CostoDeVentas.ToString();
+            CostoDeVentasTextBox.Text = costoDeVentas.ToString();
 
-            // Calcular el Capital de Trabajo Neto
             try
             {
-                // Parsear los valores de los TextBox
-                ventas = Double.Parse(VentasTextBox.Text);
-                ventas = Double.Parse(CostoDeVentasTextBox.Text);
+                // Establecer la cadena de conexión
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
 
-                // Calcular y mostrar el resultado
-                Double margenDeUtilidadBruta = (ventas - CostoDeVentas) / ventas;
-                MargenDeUtilidadBrutaTextBox.Text = margenDeUtilidadBruta.ToString();
+                // Conexión a la base de datos
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Consulta SQL para obtener las Ventas y Costo de Ventas
+                    string query = @"
+            SELECT 
+    SUM(CASE WHEN CE.TipoCuenta = 'Ventas' THEN V.Valor ELSE 0 END) AS TotalVentas,
+    SUM(CASE WHEN CE.TipoCuenta = 'Costos' THEN CV.Valor ELSE 0 END) AS TotalCostoDeVentas
+FROM CuentaEmpresa CE
+JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+LEFT JOIN Ventas V ON CE.TipoCuenta = 'Ventas' AND CE.IdCuenta = V.IdVenta
+LEFT JOIN Costos CV ON  CE.IdCuenta = CV.IdCosto
+WHERE E.IdEmpresa = 1
+GROUP BY E.IdEmpresa;";
+
+                    // Ejecutar la consulta
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        // Definir el parámetro de la consulta
+                        cmd.Parameters.AddWithValue("@IdEmpresa", 1); // Reemplazar por el Id de la empresa que deseas consultar
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Asignar los valores obtenidos desde la base de datos
+                                ventas = reader["TotalVentas"] != DBNull.Value ? Convert.ToDouble(reader["TotalVentas"]) : 0;
+                                costoDeVentas = reader["TotalCostoDeVentas"] != DBNull.Value ? Convert.ToDouble(reader["TotalCostoDeVentas"]) : 0;
+
+                                // Mostrar los valores en los TextBox
+                                VentasTextBox.Text = ventas.ToString("N2");
+                                CostoDeVentasTextBox.Text = costoDeVentas.ToString("N2");
+
+                                // Calcular y mostrar el resultado del Margen de Utilidad Bruta
+                                if (ventas != 0)
+                                {
+                                    double margenDeUtilidadBruta = (ventas - costoDeVentas) / ventas;
+                                    MargenDeUtilidadBrutaTextBox.Text = margenDeUtilidadBruta.ToString("N2");
+                                }
+                                else
+                                {
+                                    MargenDeUtilidadBrutaTextBox.Text = "N/A";
+                                    MessageBox.Show("Las ventas no pueden ser cero para este cálculo.", "Advertencia");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontraron datos para la empresa especificada.", "Sin datos");
+                            }
+                        }
+                    }
+                }
             }
             catch (FormatException)
             {
                 MessageBox.Show("Por favor, ingresa valores numéricos válidos.", "Error de Formato");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Error al acceder a la base de datos: {sqlEx.Message}", "Error SQL");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
             }
         }
+
 
         private void copyButton_Click(object sender, EventArgs e)
         {
