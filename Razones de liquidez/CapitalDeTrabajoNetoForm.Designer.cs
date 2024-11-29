@@ -116,6 +116,7 @@
             // 
             ConclusionTextBox.BackColor = Color.White;
             ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             ConclusionTextBox.Location = new Point(0, 300);
             ConclusionTextBox.Margin = new Padding(0);
             ConclusionTextBox.Multiline = true;
@@ -181,7 +182,6 @@
             button2.TabIndex = 10;
             button2.Text = "Guardar al informe final";
             button2.UseVisualStyleBackColor = false;
-            
             // 
             // label5
             // 

@@ -75,6 +75,7 @@
             // ConclusionTextBox
             // 
             ConclusionTextBox.BorderStyle = BorderStyle.None;
+            ConclusionTextBox.Font = new Font("Arial Black", 10F, FontStyle.Bold);
             ConclusionTextBox.Location = new Point(0, 300);
             ConclusionTextBox.Margin = new Padding(0);
             ConclusionTextBox.Multiline = true;
