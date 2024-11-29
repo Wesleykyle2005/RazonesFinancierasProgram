@@ -63,6 +63,7 @@
             MenuRazonRentabilidad = new System.Windows.Forms.Timer(components);
             MenuRazonEndeudamiento = new System.Windows.Forms.Timer(components);
             MenuEstadosFinancieros = new System.Windows.Forms.Timer(components);
+            button1 = new Button();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             MenuContainerEstadosFinancieros.SuspendLayout();
@@ -126,6 +127,7 @@
             flowLayoutPanel1.Controls.Add(MenuContainerActividad);
             flowLayoutPanel1.Controls.Add(MenuContainerEndeudamiento);
             flowLayoutPanel1.Controls.Add(MenuContainerRentabilidad);
+            flowLayoutPanel1.Controls.Add(button1);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 50);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -599,6 +601,22 @@
             MenuEstadosFinancieros.Interval = 10;
             MenuEstadosFinancieros.Tick += MenuEstadosFinancieros_Tick;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.Dock = DockStyle.Top;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button1.ForeColor = Color.FromArgb(187, 232, 242);
+            button1.Location = new Point(3, 651);
+            button1.Name = "button1";
+            button1.Size = new Size(300, 25);
+            button1.TabIndex = 11;
+            button1.Text = "Generar reporte";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // Home
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -660,5 +678,6 @@
         private FontAwesome.Sharp.IconButton iconButtonEstadosFinancieros;
         private System.Windows.Forms.Timer MenuEstadosFinancieros;
         private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
+        private Button button1;
     }
 }
