@@ -26,13 +26,19 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
 
         private void EvaluarButton_Click(object sender, EventArgs e)
         {
-            Double utilidadesDeInteresEImpuestos = 0;
-            Double cargosPorIntereses = 0;
+            double utilidadesDeInteresEImpuestos = 0;
+            double cargosPorIntereses = 0;
+
+            // Limpiar los TextBox antes de asignar nuevos valores
+            UtilidadesAntesDeInteresTextBox.Clear();
+            CargosPorInteresesTextBox.Clear();
+            RazonDeInteresAUtilidadesTextBox.Clear();
+            ConclusionTextBox.Clear();
 
             // Conexión a la base de datos
-            string SqlServerConnection = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString; // Reemplaza con tu cadena de conexión
+            string SqlServerConnection = ConfigurationManager.ConnectionStrings["connection_S"].ConnectionString;
             string query = @"
-   SELECT 
+    SELECT 
         SUM(CASE WHEN CE.TipoCuenta = 'Ventas' THEN I.Valor ELSE 0 END) AS TotalIngresos,
         SUM(CASE WHEN CE.TipoCuenta = 'Gastos' THEN G.Valor ELSE 0 END) AS TotalGastos
     FROM CuentaEmpresa CE
@@ -49,43 +55,54 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                 {
                     conn.Open();
 
-                    // Crear el comando SQL con el parámetro de la empresa
+                    // Crear el comando SQL
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@IdEmpresa", 1); // Reemplaza con el ID de la empresa adecuada
-
                         // Ejecutar la consulta y leer los resultados
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             // Leer el primer registro
                             if (reader.Read())
                             {
-                                // Asignar valores a las variables de utilidades antes de intereses e impuestos y cargos por intereses
-                                utilidadesDeInteresEImpuestos = reader.IsDBNull(0) ? 0 : Convert.ToDouble(reader.GetDecimal(0)); // Total Ingresos (como ejemplo de utilidades)
-                                cargosPorIntereses = reader.IsDBNull(1) ? 0 : Convert.ToDouble(reader.GetDecimal(1)); // Total Gastos (como ejemplo de cargos)
+                                // Asignar valores a las variables de utilidades y cargos
+                                utilidadesDeInteresEImpuestos = reader.IsDBNull(0) ? 0 : Convert.ToDouble(reader.GetDecimal(0)); // Total Ingresos
+                                cargosPorIntereses = reader.IsDBNull(1) ? 0 : Convert.ToDouble(reader.GetDecimal(1)); // Total Gastos
+
+                                // Validar si los valores obtenidos son cero
+                                if (utilidadesDeInteresEImpuestos == 0 || cargosPorIntereses == 0)
+                                {
+                                    string mensajeError = "No se pueden realizar cálculos porque:";
+                                    if (utilidadesDeInteresEImpuestos == 0) mensajeError += "\n- Las utilidades antes de intereses e impuestos son cero o no existen.";
+                                    if (cargosPorIntereses == 0) mensajeError += "\n- Los cargos por intereses son cero o no existen.";
+
+                                    MessageBox.Show(mensajeError, "Error en datos");
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se encontraron datos para la empresa especificada.", "Sin datos");
+                                return;
                             }
                         }
                     }
                 }
 
-                // Asignar los valores de las utilidades y los cargos a los TextBox
+                // Asignar los valores a los TextBox
                 UtilidadesAntesDeInteresTextBox.Text = utilidadesDeInteresEImpuestos.ToString("F2");
                 CargosPorInteresesTextBox.Text = cargosPorIntereses.ToString("F2");
 
-                // Calcular la razón de rotación de interés a utilidades
-                Double razonDeRotacionAInteresAUtilidades = 0;
+                // Calcular la razón de cobertura de intereses
+                double razonDeRotacionAInteresAUtilidades = 0;
 
                 if (cargosPorIntereses != 0)
                 {
                     razonDeRotacionAInteresAUtilidades = utilidadesDeInteresEImpuestos / cargosPorIntereses;
                     RazonDeInteresAUtilidadesTextBox.Text = razonDeRotacionAInteresAUtilidades.ToString("F2");
-                    string conclusion = $"La razón de cobertura de intereses es de {razonDeRotacionAInteresAUtilidades:F2}.\n";
-
-                    // Promedio de la industria (ejemplo fijo)
-                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
-                    double promedioIndustria;  // Este es un valor de ejemplo. Se debe actualizar según la industria.
 
                     // Evaluar la razón de cobertura de intereses
+                    string conclusion = $"La razón de cobertura de intereses es de {razonDeRotacionAInteresAUtilidades:F2}.\n";
+
                     if (razonDeRotacionAInteresAUtilidades < 1.5)
                     {
                         conclusion += "La empresa tiene una razón de cobertura de intereses baja, lo que indica que podría tener dificultades para cubrir sus pagos de intereses.";
@@ -99,15 +116,10 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                         conclusion += "La empresa tiene una alta razón de cobertura de intereses, lo que sugiere que tiene una fuerte capacidad para cumplir con sus pagos de intereses.";
                     }
 
-
-
-
-
-
-                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                    // Comparar con el promedio de la industria
+                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text;
+                    if (double.TryParse(promedioIndustriaText, out double promedioIndustria))
                     {
-
-                        // Comparación con el promedio de la industria
                         if (razonDeRotacionAInteresAUtilidades > promedioIndustria)
                         {
                             conclusion += $"\nLa razón de cobertura de intereses de la empresa es superior al promedio de la industria ({promedioIndustria}), lo que indica que la empresa tiene una excelente capacidad para cubrir sus intereses.";
@@ -126,12 +138,12 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                         conclusion += "\nNo se pudo comparar con el promedio de la industria.";
                     }
 
-
-
-
-
-                    // Comparación con el promedio de la industria
-
+                    // Mostrar la conclusión
+                    ConclusionTextBox.Text = conclusion;
+                }
+                else
+                {
+                    MessageBox.Show("No se pueden realizar cálculos con cargos por intereses cero.", "Error en cálculo");
                 }
             }
             catch (FormatException)
@@ -147,6 +159,7 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                 MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error");
             }
         }
+
 
 
         private void copyButton_Click(object sender, EventArgs e)

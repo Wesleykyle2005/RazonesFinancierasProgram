@@ -181,6 +181,7 @@
             button2.TabIndex = 10;
             button2.Text = "Guardar al informe final";
             button2.UseVisualStyleBackColor = false;
+            
             // 
             // label5
             // 

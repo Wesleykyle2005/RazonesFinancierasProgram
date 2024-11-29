@@ -58,12 +58,12 @@
             MargenDeUtilidadDeOperacionButton = new Button();
             MargenDeUtilidadBrutaButton = new Button();
             iconButtonRazonRentabilidad = new FontAwesome.Sharp.IconButton();
+            button1 = new Button();
             MenuActividadesLiquidez = new System.Windows.Forms.Timer(components);
             MenuRazonActividad = new System.Windows.Forms.Timer(components);
             MenuRazonRentabilidad = new System.Windows.Forms.Timer(components);
             MenuRazonEndeudamiento = new System.Windows.Forms.Timer(components);
             MenuEstadosFinancieros = new System.Windows.Forms.Timer(components);
-            button1 = new Button();
             panel1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             MenuContainerEstadosFinancieros.SuspendLayout();
@@ -576,6 +576,22 @@
             iconButtonRazonRentabilidad.UseVisualStyleBackColor = false;
             iconButtonRazonRentabilidad.Click += iconButtonRazonRentabilidad_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Black;
+            button1.Dock = DockStyle.Top;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            button1.ForeColor = Color.FromArgb(187, 232, 242);
+            button1.Location = new Point(3, 651);
+            button1.Name = "button1";
+            button1.Size = new Size(300, 25);
+            button1.TabIndex = 11;
+            button1.Text = "Generar reporte";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // MenuActividadesLiquidez
             // 
             MenuActividadesLiquidez.Interval = 10;
@@ -600,22 +616,6 @@
             // 
             MenuEstadosFinancieros.Interval = 10;
             MenuEstadosFinancieros.Tick += MenuEstadosFinancieros_Tick;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Black;
-            button1.Dock = DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            button1.ForeColor = Color.FromArgb(187, 232, 242);
-            button1.Location = new Point(3, 651);
-            button1.Name = "button1";
-            button1.Size = new Size(300, 25);
-            button1.TabIndex = 11;
-            button1.Text = "Generar reporte";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.UseVisualStyleBackColor = false;
             // 
             // Home
             // 

@@ -127,7 +127,7 @@ namespace RazonesFinancieras.Razones_de_liquidez
 
 
         private void copyButton_Click(object sender, EventArgs e)
-        {         
+        {
             if (!string.IsNullOrWhiteSpace(ConclusionTextBox.Text))
             {
                 Clipboard.SetText(ConclusionTextBox.Text);
@@ -138,5 +138,7 @@ namespace RazonesFinancieras.Razones_de_liquidez
                 MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        
     }
 }

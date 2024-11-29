@@ -14,7 +14,7 @@ namespace RazonesFinancieras.Estados_financieros
         int idEmpresa = 1;
         public Estado_de_resultados()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             EnableDoubleBuffering(dgvCuentas);
             int idEmpresa = 1;
             LoadData(idEmpresa);
@@ -24,7 +24,9 @@ namespace RazonesFinancieras.Estados_financieros
             dgvCuentas.Columns["NombreCuenta"].ReadOnly = true;
             dgvCuentas.Columns["Clasificacion"].ReadOnly = true;
             dgvCuentas.Columns["Valor"].ReadOnly = false;
-            
+            dgvCuentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+
 
 
         }
@@ -147,6 +149,67 @@ namespace RazonesFinancieras.Estados_financieros
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private void DeleteRowButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvCuentas.SelectedRows.Count > 0)
+                {
+                    // Obtener la fila seleccionada
+                    DataGridViewRow selectedRow = dgvCuentas.SelectedRows[0];
+
+                    // Obtener los valores necesarios para eliminar el registro
+                    string tipoCuenta = selectedRow.Cells["TipoCuenta"].Value?.ToString();
+                    string nombreCuenta = selectedRow.Cells["NombreCuenta"].Value?.ToString();
+
+                    if (!string.IsNullOrEmpty(tipoCuenta) && !string.IsNullOrEmpty(nombreCuenta))
+                    {
+                        // Confirmar la eliminación
+                        DialogResult dialogResult = MessageBox.Show(
+                            "¿Estás seguro de que deseas eliminar esta cuenta?",
+                            "Confirmar eliminación",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            // Eliminar de la base de datos
+                            using (SqlConnection connection = new SqlConnection(sqlServerConnectionString))
+                            {
+                                connection.Open();
+
+                                using (SqlCommand cmd = new SqlCommand("spEliminarCuenta", connection))
+                                {
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@TipoCuenta", tipoCuenta);
+                                    cmd.Parameters.AddWithValue("@NombreCuenta", nombreCuenta);
+
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            // Eliminar de la vista
+                            dgvCuentas.Rows.Remove(selectedRow);
+
+                            MessageBox.Show("La cuenta ha sido eliminada exitosamente.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo obtener la información de la cuenta seleccionada.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona una fila para eliminar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocurrió un error al eliminar la cuenta: {ex.Message}");
             }
         }
     }

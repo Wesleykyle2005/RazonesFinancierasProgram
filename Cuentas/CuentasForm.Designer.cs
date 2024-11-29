@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             EnviarCambiosButton = new Button();
             ActualizarButton = new Button();
             bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
@@ -48,6 +48,7 @@
             label3 = new Label();
             txtNombreCuenta = new TextBox();
             label1 = new Label();
+            DeleteRowButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCuentas).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -104,27 +105,27 @@
             dgvCuentas.BackgroundColor = Color.White;
             dgvCuentas.BorderStyle = BorderStyle.None;
             dgvCuentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvCuentas.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvCuentas.DefaultCellStyle = dataGridViewCellStyle1;
             dgvCuentas.Dock = DockStyle.Fill;
             dgvCuentas.GridColor = Color.Black;
             dgvCuentas.Location = new Point(0, 0);
             dgvCuentas.MultiSelect = false;
             dgvCuentas.Name = "dgvCuentas";
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvCuentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvCuentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvCuentas.Size = new Size(700, 241);
             dgvCuentas.TabIndex = 71;
             // 
@@ -139,6 +140,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(DeleteRowButton);
             panel2.Controls.Add(panel1);
             panel2.Controls.Add(ActualizarButton);
             panel2.Controls.Add(EnviarCambiosButton);
@@ -300,6 +302,22 @@
             label1.TabIndex = 64;
             label1.Text = "Tipo de cuenta";
             // 
+            // DeleteRowButton
+            // 
+            DeleteRowButton.BackColor = Color.FromArgb(150, 150, 150);
+            DeleteRowButton.FlatAppearance.BorderSize = 0;
+            DeleteRowButton.FlatStyle = FlatStyle.Flat;
+            DeleteRowButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            DeleteRowButton.ForeColor = Color.Black;
+            DeleteRowButton.Location = new Point(391, 0);
+            DeleteRowButton.Margin = new Padding(0);
+            DeleteRowButton.Name = "DeleteRowButton";
+            DeleteRowButton.Size = new Size(150, 30);
+            DeleteRowButton.TabIndex = 75;
+            DeleteRowButton.Text = "Eliminar cuenta";
+            DeleteRowButton.UseVisualStyleBackColor = false;
+            DeleteRowButton.Click += DeleteRowButton_Click;
+            // 
             // Estado_de_resultados
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -341,5 +359,6 @@
         private Label label1;
         private TextBox txtEmpId;
         private Button AddCuenta;
+        private Button DeleteRowButton;
     }
 }
