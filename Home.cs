@@ -30,9 +30,9 @@ namespace RazonesFinancieras
             InitializeMenuStates();
             mdiProp();
             this.WindowState = FormWindowState.Maximized;
-            nightControlBox1.EnableMaximizeButton=false;
-            nightControlBox1.DisableMaximizeColor= Color.FromArgb(255,242, 193, 133);
-            
+            nightControlBox1.EnableMaximizeButton = false;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(255, 242, 193, 133);
+
         }
         private void mdiProp()
         {
@@ -149,7 +149,7 @@ namespace RazonesFinancieras
         }
 
         // Botón para abrir Balance General
-       
+
 
         // Botón para abrir Estado de Resultados
         private void EstadoDeResultadosButton_Click(object sender, EventArgs e)
@@ -231,7 +231,7 @@ namespace RazonesFinancieras
 
         private void MargenDeUtilidadNetaButton_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(MargenDeUtilidadNeta,new MargenDeUtilidadNetaForm());
+            AbrirFormulario(MargenDeUtilidadNeta, new MargenDeUtilidadNetaForm());
         }
 
 
@@ -255,9 +255,9 @@ namespace RazonesFinancieras
                 formulario.Shown += (s, args) =>
                 {
                     // Desplazar los controles después de que el formulario se muestre
-                    DesplazarControles(formulario, (this.Height-formulario.Height)/2);
-                    formulario.Dock= DockStyle.Fill;
-                    
+                    DesplazarControles(formulario, (this.Height - formulario.Height) / 2);
+                    formulario.Dock = DockStyle.Fill;
+
                 };
 
                 formulario.Show();
@@ -288,6 +288,35 @@ namespace RazonesFinancieras
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Crear una instancia del SaveFileDialog
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    // Establecer las propiedades del dialogo
+                    saveFileDialog.Filter = "Archivos CSV (*.csv)|*.csv|Todos los archivos (*.*)|*.*"; // Filtro para archivos CSV
+                    saveFileDialog.DefaultExt = "csv"; // Extensión por defecto
+                    saveFileDialog.FileName = "conclusiones.csv"; // Nombre por defecto del archivo
 
+                    // Mostrar el dialogo para que el usuario seleccione la ruta y el archivo
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Obtener la ruta seleccionada por el usuario
+                        string rutaArchivo = saveFileDialog.FileName;
+
+                        // Guardar todas las conclusiones en el archivo CSV usando el método de la clase ConclusionesFinancieras
+                        ConclusionesFinancieras.GuardarConclusionesEnCSV(rutaArchivo);
+
+                        MessageBox.Show("Todas las conclusiones han sido guardadas exitosamente en formato CSV.", "Éxito");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar las conclusiones en CSV: {ex.Message}", "Error");
+            }
+        }
     }
 }

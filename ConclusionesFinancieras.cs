@@ -1,28 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RazonesFinancieras
 {
     public static class ConclusionesFinancieras
     {
-        public static List<string> Conclusiones { get; private set; } = new List<string>();
-
-        // Método para agregar una conclusión
-        public static void AgregarConclusion(string conclusion)
+        // Clase para almacenar una conclusión con su título, fecha y texto
+        public class Conclusion
         {
-            if (!string.IsNullOrWhiteSpace(conclusion))
+            public string Titulo { get; set; }
+            public string Fecha { get; set; }
+            public string Texto { get; set; }
+
+            public Conclusion(string titulo, string texto)
             {
-                Conclusiones.Add(conclusion);
+                Titulo = titulo;
+                Fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                Texto = texto;
             }
         }
 
-        // Método para obtener todas las conclusiones
-        public static List<string> ObtenerConclusiones()
+        // Lista estática para almacenar las conclusiones
+        public static List<Conclusion> Conclusiones = new List<Conclusion>();
+
+        // Método para agregar una conclusión a la lista
+        public static void AgregarConclusion(string titulo, string conclusion)
         {
-            return new List<string>(Conclusiones);
+            // Crear el objeto Conclusion y agregarlo a la lista
+            var conclusionObj = new Conclusion(titulo, conclusion);
+            Conclusiones.Add(conclusionObj);
+        }
+
+        // Método para guardar todas las conclusiones en un archivo CSV
+        public static void GuardarConclusionesEnCSV(string rutaArchivo)
+        {
+            try
+            {
+                // Crear un StringBuilder para construir las líneas del CSV
+                StringBuilder sb = new StringBuilder();
+
+                // Agregar encabezados
+                sb.AppendLine("Titulo,Fecha,Conclusion");
+
+                // Agregar cada conclusión de la lista (ahora con objetos de tipo Conclusion)
+                foreach (var conclusion in Conclusiones)
+                {
+                    // Asegúrate de que el título, fecha y conclusión estén correctamente formateados
+                    string line = $"{conclusion.Titulo},{conclusion.Fecha},{conclusion.Texto.Replace("\"", "\"\"").Replace("\n", " ").Replace("\r", "")}";
+                    sb.AppendLine(line);
+                }
+
+                // Escribir en el archivo usando UTF-8 para soportar caracteres especiales
+                File.WriteAllText(rutaArchivo, sb.ToString(), Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                Console.WriteLine($"Error al guardar el archivo CSV: {ex.Message}");
+            }
         }
     }
 }

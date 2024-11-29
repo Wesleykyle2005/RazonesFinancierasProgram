@@ -591,6 +591,7 @@
             button1.Text = "Generar reporte";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // MenuActividadesLiquidez
             // 

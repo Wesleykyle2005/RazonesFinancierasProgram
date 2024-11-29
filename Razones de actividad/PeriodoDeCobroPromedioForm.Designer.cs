@@ -37,7 +37,7 @@
             label2 = new Label();
             CuentasPorCobrarTxt = new TextBox();
             VentasTxt = new TextBox();
-            button2 = new Button();
+            GuardarConclusionButton = new Button();
             copyButton = new Button();
             label5 = new Label();
             txtPromedioDeLaIndustria = new TextBox();
@@ -146,20 +146,21 @@
             VentasTxt.Size = new Size(100, 20);
             VentasTxt.TabIndex = 48;
             // 
-            // button2
+            // GuardarConclusionButton
             // 
-            button2.BackColor = Color.FromArgb(150, 150, 150);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Arial Black", 10F, FontStyle.Bold);
-            button2.ForeColor = Color.Black;
-            button2.Location = new Point(500, 400);
-            button2.Margin = new Padding(0);
-            button2.Name = "button2";
-            button2.Size = new Size(200, 30);
-            button2.TabIndex = 89;
-            button2.Text = "Guardar al informe final";
-            button2.UseVisualStyleBackColor = false;
+            GuardarConclusionButton.BackColor = Color.FromArgb(150, 150, 150);
+            GuardarConclusionButton.FlatAppearance.BorderSize = 0;
+            GuardarConclusionButton.FlatStyle = FlatStyle.Flat;
+            GuardarConclusionButton.Font = new Font("Arial Black", 10F, FontStyle.Bold);
+            GuardarConclusionButton.ForeColor = Color.Black;
+            GuardarConclusionButton.Location = new Point(500, 400);
+            GuardarConclusionButton.Margin = new Padding(0);
+            GuardarConclusionButton.Name = "GuardarConclusionButton";
+            GuardarConclusionButton.Size = new Size(200, 30);
+            GuardarConclusionButton.TabIndex = 89;
+            GuardarConclusionButton.Text = "Guardar al informe final";
+            GuardarConclusionButton.UseVisualStyleBackColor = false;
+            GuardarConclusionButton.Click += GuardarConclusionButton_Click;
             // 
             // copyButton
             // 
@@ -207,7 +208,7 @@
             ClientSize = new Size(700, 450);
             Controls.Add(label5);
             Controls.Add(txtPromedioDeLaIndustria);
-            Controls.Add(button2);
+            Controls.Add(GuardarConclusionButton);
             Controls.Add(copyButton);
             Controls.Add(EvaluarButton);
             Controls.Add(label4);
@@ -237,7 +238,7 @@
         private Label label2;
         private TextBox CuentasPorCobrarTxt;
         private TextBox VentasTxt;
-        private Button button2;
+        private Button GuardarConclusionButton;
         private Button copyButton;
         private Label label5;
         private TextBox txtPromedioDeLaIndustria;
