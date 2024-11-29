@@ -90,6 +90,48 @@ namespace RazonesFinancieras.Razones_de_rentabilidad
                                 {
                                     Double margendeUtilidadNeta = utilidadNetaDespuesDeImpuestos / ventasTotales;
                                     MargenDeUtilidadNetaTextBox.Text = margendeUtilidadNeta.ToString("P2");
+                                    // Obtener el promedio de la industria
+                                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text;
+                                    double promedioIndustria;
+                                    string conclusion = $"El margen de utilidad neta es de {margendeUtilidadNeta:P2}.\n";
+
+                                    // Evaluar el desempeño
+                                    if (margendeUtilidadNeta < 0.01)
+                                    {
+                                        conclusion += "Este margen es extremadamente bajo, indicando un bajo control de costos o precios muy competitivos.";
+                                    }
+                                    else if (margendeUtilidadNeta >= 0.01 && margendeUtilidadNeta < 0.10)
+                                    {
+                                        conclusion += "El margen es moderado, típico de muchas industrias.";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "El margen es alto, indicando una excelente gestión de costos y precios.";
+                                    }
+
+                                    // Comparar con el promedio de la industria
+                                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                                    {
+                                        if (margendeUtilidadNeta < promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste margen está por debajo del promedio de la industria ({promedioIndustria:P2}), indicando un desempeño inferior.";
+                                        }
+                                        else if (margendeUtilidadNeta > promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste margen supera el promedio de la industria ({promedioIndustria:P2}), destacándose entre sus competidores.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += $"\nEste margen coincide con el promedio de la industria ({promedioIndustria:P2}).";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox de conclusiones
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {

@@ -84,6 +84,48 @@ namespace RazonesFinancieras.Razones_de_rentabilidad
                                 {
                                     double margenDeUtilidadOperativa = utilidadOperativa / ventas;
                                     MargenDeUtilidadOperativaTextBox.Text = margenDeUtilidadOperativa.ToString("P2");
+                                    // Comparar con el promedio de la industria si está disponible
+                                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                                    double promedioIndustria;
+                                    string conclusion = $"El margen de utilidad operativa es de {margenDeUtilidadOperativa:P2}.\n";
+
+                                    // Evaluar el desempeño
+                                    if (margenDeUtilidadOperativa < 0.10)
+                                    {
+                                        conclusion += "El margen es bajo, indicando un control deficiente de costos y gastos.";
+                                    }
+                                    else if (margenDeUtilidadOperativa >= 0.10 && margenDeUtilidadOperativa < 0.20)
+                                    {
+                                        conclusion += "El margen es moderado, indicando una gestión razonable.";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "El margen es alto, indicando una excelente gestión de costos y gastos.";
+                                    }
+
+                                    // Comparar con el promedio de la industria
+                                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                                    {
+                                        if (margenDeUtilidadOperativa < promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste margen es inferior al promedio de la industria ({promedioIndustria:P2}), indicando un desempeño menor al promedio.";
+                                        }
+                                        else if (margenDeUtilidadOperativa > promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste margen es superior al promedio de la industria ({promedioIndustria:P2}), indicando un desempeño mejor que el promedio.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += $"\nEste margen es igual al promedio de la industria ({promedioIndustria:P2}).";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox de conclusiones
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {
