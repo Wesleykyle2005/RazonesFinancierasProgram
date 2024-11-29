@@ -78,6 +78,49 @@ GROUP BY E.IdEmpresa;";
                                 {
                                     double margenDeUtilidadBruta = (ventas - costoDeVentas) / ventas;
                                     MargenDeUtilidadBrutaTextBox.Text = margenDeUtilidadBruta.ToString("N2");
+                                    // Comparar con el promedio de la industria si está disponible
+                                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                                    double promedioIndustria;
+
+                                    string conclusion = $"El margen de utilidad bruta es de {margenDeUtilidadBruta:P2}.\n";
+
+                                    // Evaluar la eficiencia
+                                    if (margenDeUtilidadBruta < 0.1)
+                                    {
+                                        conclusion += "Este valor es inferior al promedio esperado, lo que indica un bajo margen de utilidad bruta.";
+                                    }
+                                    else if (margenDeUtilidadBruta > 0.5)
+                                    {
+                                        conclusion += "Este valor es superior al promedio esperado, lo que indica un buen margen de utilidad bruta.";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "Este valor está dentro del promedio esperado, lo que indica un margen de utilidad bruta equilibrado.";
+                                    }
+
+                                    // Comparar con el promedio de la industria si está disponible
+                                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                                    {
+                                        if (margenDeUtilidadBruta < promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste valor es inferior al promedio de la industria ({promedioIndustria:P2}), lo que sugiere una menor eficiencia en la gestión de costos.";
+                                        }
+                                        else if (margenDeUtilidadBruta > promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste valor es superior al promedio de la industria ({promedioIndustria:P2}), lo que indica una mayor eficiencia en la gestión de costos.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += $"\nEste valor es similar al promedio de la industria ({promedioIndustria:P2}), lo que sugiere una eficiencia comparable en la gestión de costos.";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox de conclusiones
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {

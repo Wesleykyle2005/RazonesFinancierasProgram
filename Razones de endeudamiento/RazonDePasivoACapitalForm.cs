@@ -78,6 +78,57 @@ GROUP BY E.IdEmpresa";
                 {
                     razonDePasivoACapital = pasivoALargoPlazo / capitalSocial;
                     RazonDePasivoACapitalTextBox.Text = razonDePasivoACapital.ToString("F2");
+                    string conclusion = $"La razón pasivo a capital es de {razonDePasivoACapital:F2}.\n";
+
+                    // Promedio de la industria (ejemplo fijo)
+                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                    double promedioIndustria;
+
+                    // Evaluar la razón de pasivo a capital
+                    if (razonDePasivoACapital < 1.0)
+                    {
+                        conclusion += "La empresa tiene una razón pasivo a capital baja, lo que indica que depende en menor medida de los acreedores para financiar sus operaciones.";
+                    }
+                    else if (razonDePasivoACapital >= 1.0 && razonDePasivoACapital <= 2.0)
+                    {
+                        conclusion += "La empresa tiene una razón pasivo a capital moderada, lo que indica que tiene un grado de apalancamiento balanceado.";
+                    }
+                    else
+                    {
+                        conclusion += "La empresa tiene una alta razón pasivo a capital, lo que sugiere un grado de apalancamiento elevado y una mayor dependencia de los acreedores para financiar sus operaciones.";
+                    }
+
+                    // Comparación con el promedio de la industria
+                    
+
+                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                    {
+
+                        if (razonDePasivoACapital > promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón pasivo a capital de la empresa es superior al promedio de la industria ({promedioIndustria * 100}%), lo que indica que la empresa podría estar más apalancada que sus competidores en el sector.";
+                        }
+                        else if (razonDePasivoACapital < promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón pasivo a capital de la empresa es inferior al promedio de la industria ({promedioIndustria * 100}%), lo que sugiere que la empresa tiene un apalancamiento financiero más bajo que sus competidores.";
+                        }
+                        else
+                        {
+                            conclusion += $"\nLa razón pasivo a capital de la empresa es igual al promedio de la industria ({promedioIndustria * 100}%), lo que indica que la empresa tiene un grado de apalancamiento comparable con el sector.";
+                        }
+                    }
+                    else
+                    {
+                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                    }
+
+
+
+
+
+
+                    // Mostrar la conclusión en el TextBox de conclusiones
+                    ConclusionTextBox.Text = conclusion;
                 }
                 else
                 {

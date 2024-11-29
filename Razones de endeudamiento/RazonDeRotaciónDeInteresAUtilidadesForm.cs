@@ -79,10 +79,59 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                 {
                     razonDeRotacionAInteresAUtilidades = utilidadesDeInteresEImpuestos / cargosPorIntereses;
                     RazonDeInteresAUtilidadesTextBox.Text = razonDeRotacionAInteresAUtilidades.ToString("F2");
-                }
-                else
-                {
-                    MessageBox.Show("Los cargos por intereses no pueden ser cero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string conclusion = $"La razón de cobertura de intereses es de {razonDeRotacionAInteresAUtilidades:F2}.\n";
+
+                    // Promedio de la industria (ejemplo fijo)
+                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                    double promedioIndustria;  // Este es un valor de ejemplo. Se debe actualizar según la industria.
+
+                    // Evaluar la razón de cobertura de intereses
+                    if (razonDeRotacionAInteresAUtilidades < 1.5)
+                    {
+                        conclusion += "La empresa tiene una razón de cobertura de intereses baja, lo que indica que podría tener dificultades para cubrir sus pagos de intereses.";
+                    }
+                    else if (razonDeRotacionAInteresAUtilidades >= 1.5 && razonDeRotacionAInteresAUtilidades <= 3.0)
+                    {
+                        conclusion += "La empresa tiene una razón de cobertura de intereses moderada, lo que indica una capacidad razonable para cubrir sus pagos de intereses.";
+                    }
+                    else
+                    {
+                        conclusion += "La empresa tiene una alta razón de cobertura de intereses, lo que sugiere que tiene una fuerte capacidad para cumplir con sus pagos de intereses.";
+                    }
+
+
+
+
+
+
+                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                    {
+
+                        // Comparación con el promedio de la industria
+                        if (razonDeRotacionAInteresAUtilidades > promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón de cobertura de intereses de la empresa es superior al promedio de la industria ({promedioIndustria}), lo que indica que la empresa tiene una excelente capacidad para cubrir sus intereses.";
+                        }
+                        else if (razonDeRotacionAInteresAUtilidades < promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón de cobertura de intereses de la empresa es inferior al promedio de la industria ({promedioIndustria}), lo que sugiere que la empresa tiene una capacidad de cobertura de intereses por debajo de la media del sector.";
+                        }
+                        else
+                        {
+                            conclusion += $"\nLa razón de cobertura de intereses de la empresa es igual al promedio de la industria ({promedioIndustria}), lo que indica que tiene una capacidad de pago de intereses comparable con la media del sector.";
+                        }
+                    }
+                    else
+                    {
+                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                    }
+
+
+
+
+
+                    // Comparación con el promedio de la industria
+
                 }
             }
             catch (FormatException)

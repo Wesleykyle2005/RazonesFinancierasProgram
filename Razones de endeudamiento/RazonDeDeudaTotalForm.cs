@@ -66,26 +66,66 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                 ActivosTotalesTextBox.Text = activosTotales.ToString("F2");
 
                 Double razonDeDeuda = 0;
+                string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                double promedioIndustria;
 
                 if (activosTotales != 0)
                 {
                     razonDeDeuda = pasivosTotales / activosTotales;
                     RazonDeLaDeudaTextBox.Text = razonDeDeuda.ToString("F2");
+                    string conclusion = $"La razón de deuda es de {razonDeDeuda:F2}.\n";
+
+                    // Evaluar la razón de deuda
                     if (razonDeDeuda < 0.5)
                     {
-                        ConclusionTextBox.Text = 
-                            "La empresa tiene una baja razón de deuda, lo que indica que tiene una buena solvencia y capacidad para pagar sus deudas.";
+                        conclusion += "La empresa tiene una baja razón de deuda, lo que indica que tiene una buena solvencia y capacidad para pagar sus deudas.";
                     }
                     else if (razonDeDeuda >= 0.5 && razonDeDeuda <= 1.0)
                     {
-                        ConclusionTextBox.Text = 
-                            "La empresa tiene una razón de deuda moderada, lo que indica un balance aceptable entre los activos y pasivos.";
+                        conclusion += "La empresa tiene una razón de deuda moderada, lo que indica un balance aceptable entre los activos y pasivos.";
                     }
                     else
                     {
-                        ConclusionTextBox.Text = 
-                            "La empresa tiene una alta razón de deuda, lo que sugiere que podría tener dificultades para cumplir con sus obligaciones financieras.";
+                        conclusion += "La empresa tiene una alta razón de deuda, lo que sugiere que podría tener dificultades para cumplir con sus obligaciones financieras.";
                     }
+
+                    // Comparación con el 50% de los activos financiados con deuda
+                    if (razonDeDeuda > 0.5)
+                    {
+                        conclusion += "\nMás del 50% de los activos totales están financiados con deudas, lo que podría poner el control de la empresa en manos de los acreedores.";
+                    }
+                    else
+                    {
+                        conclusion += "\nEl coeficiente es menor al 50%, lo que sugiere que la empresa mantiene un buen control sobre sus operaciones y no depende excesivamente de la deuda.";
+                    }
+
+
+                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                    {
+                        
+                        if (razonDeDeuda > promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón de deuda de la empresa es superior al promedio de la industria ({promedioIndustria * 100}%). Esto sugiere que la empresa podría estar más endeudada que sus competidores del sector.";
+                        }
+                        else if (razonDeDeuda < promedioIndustria)
+                        {
+                            conclusion += $"\nLa razón de deuda de la empresa es inferior al promedio de la industria ({promedioIndustria * 100}%), lo que indica que la empresa tiene una deuda relativamente baja en comparación con sus competidores.";
+                        }
+                        else
+                        {
+                            conclusion += $"\nLa razón de deuda de la empresa es igual al promedio de la industria ({promedioIndustria * 100}%), lo que indica que la empresa tiene un nivel de endeudamiento comparable con sus competidores.";
+                        }
+                    }
+                    else
+                    {
+                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                    }
+
+
+                    
+
+                    // Mostrar la conclusión en el TextBox de conclusiones
+                    ConclusionTextBox.Text = conclusion;
                 }
                 else
                 {
