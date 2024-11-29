@@ -139,6 +139,29 @@ namespace RazonesFinancieras.Razones_de_liquidez
             }
         }
 
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtén la conclusión del TextBox
+                string conclusion = ConclusionTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(conclusion))
+                {
+                    // Agregar la conclusión a la lista en la clase ConclusionesFinancieras
+                    ConclusionesFinancieras.AgregarConclusion(this.Text, conclusion);
+
+                    MessageBox.Show("Conclusión guardada exitosamente.", "Éxito");
+                }
+                else
+                {
+                    MessageBox.Show("No hay ninguna conclusión para guardar.", "Advertencia");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la conclusión: {ex.Message}", "Error");
+            }
+        }
     }
 }

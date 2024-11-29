@@ -296,9 +296,9 @@ namespace RazonesFinancieras
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
                     // Establecer las propiedades del dialogo
-                    saveFileDialog.Filter = "Archivos CSV (*.csv)|*.csv|Todos los archivos (*.*)|*.*"; // Filtro para archivos CSV
-                    saveFileDialog.DefaultExt = "csv"; // Extensión por defecto
-                    saveFileDialog.FileName = "conclusiones.csv"; // Nombre por defecto del archivo
+                    saveFileDialog.Filter = "Archivos Excel (*.xlsx)|*.xlsx|Todos los archivos (*.*)|*.*"; // Filtro para archivos CSV y Excel
+                    saveFileDialog.DefaultExt = "xlsx"; // Extensión por defecto
+                    saveFileDialog.FileName = "conclusiones"; // Nombre por defecto del archivo
 
                     // Mostrar el dialogo para que el usuario seleccione la ruta y el archivo
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -306,16 +306,23 @@ namespace RazonesFinancieras
                         // Obtener la ruta seleccionada por el usuario
                         string rutaArchivo = saveFileDialog.FileName;
 
-                        // Guardar todas las conclusiones en el archivo CSV usando el método de la clase ConclusionesFinancieras
-                        ConclusionesFinancieras.GuardarConclusionesEnCSV(rutaArchivo);
-
-                        MessageBox.Show("Todas las conclusiones han sido guardadas exitosamente en formato CSV.", "Éxito");
+                        // Verificar la extensión del archivo elegido
+                        if (rutaArchivo.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Guardar todas las conclusiones en el archivo Excel
+                            ConclusionesFinancieras.GuardarConclusionesEnExcel(rutaArchivo);
+                           
+                        }
+                        else
+                        {
+                            MessageBox.Show("El formato de archivo seleccionado no es compatible.", "Error");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al guardar las conclusiones en CSV: {ex.Message}", "Error");
+                MessageBox.Show($"Error al guardar las conclusiones: {ex.Message}", "Error");
             }
         }
     }

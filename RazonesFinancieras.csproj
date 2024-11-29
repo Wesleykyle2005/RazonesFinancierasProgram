@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
+    <PackageReference Include="EPPlus" Version="7.5.1" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Krypton.Toolkit" Version="90.24.11.317" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />

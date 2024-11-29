@@ -102,7 +102,7 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
 
                     if (double.TryParse(promedioIndustriaText, out promedioIndustria))
                     {
-                        
+
                         if (razonDeDeuda > promedioIndustria)
                         {
                             conclusion += $"\nLa razón de deuda de la empresa es superior al promedio de la industria ({promedioIndustria * 100}%). Esto sugiere que la empresa podría estar más endeudada que sus competidores del sector.";
@@ -122,7 +122,7 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
                     }
 
 
-                    
+
 
                     // Mostrar la conclusión en el TextBox de conclusiones
                     ConclusionTextBox.Text = conclusion;
@@ -158,6 +158,31 @@ namespace RazonesFinancieras.Razones_de_endeudamiento
             else
             {
                 MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtén la conclusión del TextBox
+                string conclusion = ConclusionTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(conclusion))
+                {
+                    // Agregar la conclusión a la lista en la clase ConclusionesFinancieras
+                    ConclusionesFinancieras.AgregarConclusion(this.Text, conclusion);
+
+                    MessageBox.Show("Conclusión guardada exitosamente.", "Éxito");
+                }
+                else
+                {
+                    MessageBox.Show("No hay ninguna conclusión para guardar.", "Advertencia");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la conclusión: {ex.Message}", "Error");
             }
         }
     }

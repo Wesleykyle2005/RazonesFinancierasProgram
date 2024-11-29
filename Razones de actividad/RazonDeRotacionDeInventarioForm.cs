@@ -80,7 +80,7 @@ namespace RazonesFinancieras.Razones_de_actividad
                 double periodoEnMeses = 12 / rotacionDeInventarios;
                 double periodoEnDias = 360 / rotacionDeInventarios;
 
-               
+
 
                 // Generar interpretación
                 string conclusion = $"La rotación de inventarios es {rotacionDeInventarios:N2}. Esto significa que la empresa renueva su inventario aproximadamente cada {periodoEnMeses:F2} meses o cada {periodoEnDias:F2} días. ";
@@ -144,6 +144,31 @@ namespace RazonesFinancieras.Razones_de_actividad
             else
             {
                 MessageBox.Show("No hay contenido para copiar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtén la conclusión del TextBox
+                string conclusion = ConclusionTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(conclusion))
+                {
+                    // Agregar la conclusión a la lista en la clase ConclusionesFinancieras
+                    ConclusionesFinancieras.AgregarConclusion(this.Text, conclusion);
+
+                    MessageBox.Show("Conclusión guardada exitosamente.", "Éxito");
+                }
+                else
+                {
+                    MessageBox.Show("No hay ninguna conclusión para guardar.", "Advertencia");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la conclusión: {ex.Message}", "Error");
             }
         }
     }
