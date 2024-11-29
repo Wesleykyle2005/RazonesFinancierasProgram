@@ -201,7 +201,6 @@
             txtPromedioDeLaIndustria.Margin = new Padding(0);
             txtPromedioDeLaIndustria.Multiline = true;
             txtPromedioDeLaIndustria.Name = "txtPromedioDeLaIndustria";
-            txtPromedioDeLaIndustria.ReadOnly = true;
             txtPromedioDeLaIndustria.Size = new Size(100, 20);
             txtPromedioDeLaIndustria.TabIndex = 11;
             // 

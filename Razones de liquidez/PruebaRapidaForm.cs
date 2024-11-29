@@ -40,17 +40,17 @@ namespace RazonesFinancieras.Razones_de_liquidez
 
                     // Consulta SQL para obtener el Activo Circulante, Pasivo Circulante e Inventarios
                     string query = @"
-            SELECT 
-    SUM(CASE WHEN CE.TipoCuenta = 'Activos' AND A.Clasificacion = 'Activo Circulante' THEN A.Valor ELSE 0 END) AS TotalActivoCirculante,
-    SUM(CASE WHEN CE.TipoCuenta = 'Pasivos' AND P.Clasificacion = 'Pasivo corto plazo' THEN P.Valor ELSE 0 END) AS TotalPasivoCirculante,
-    SUM(CASE WHEN CE.TipoCuenta = 'Activos' AND I.NombreCuenta = 'Inventarios' THEN I.Valor ELSE 0 END) AS TotalInventarios
-FROM CuentaEmpresa CE
-JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
-LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
-LEFT JOIN Pasivos P ON CE.TipoCuenta = 'Pasivos' AND CE.IdCuenta = P.IdPasivo
-LEFT JOIN Activos I ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = I.IdActivo AND I.NombreCuenta = 'Inventarios' 
-WHERE E.IdEmpresa = 1
-GROUP BY E.IdEmpresa;
+                    SELECT 
+                    SUM(CASE WHEN CE.TipoCuenta = 'Activos' AND A.Clasificacion = 'Activo Circulante' THEN A.Valor ELSE 0 END) AS TotalActivoCirculante,
+                    SUM(CASE WHEN CE.TipoCuenta = 'Pasivos' AND P.Clasificacion = 'Pasivo corto plazo' THEN P.Valor ELSE 0 END) AS TotalPasivoCirculante,
+                    SUM(CASE WHEN CE.TipoCuenta = 'Activos' AND I.NombreCuenta = 'Inventarios' THEN I.Valor ELSE 0 END) AS TotalInventarios
+                    FROM CuentaEmpresa CE
+                    JOIN Empresa E ON CE.IdEmpresa = E.IdEmpresa
+                    LEFT JOIN Activos A ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = A.IdActivo
+                    LEFT JOIN Pasivos P ON CE.TipoCuenta = 'Pasivos' AND CE.IdCuenta = P.IdPasivo
+                    LEFT JOIN Activos I ON CE.TipoCuenta = 'Activos' AND CE.IdCuenta = I.IdActivo AND I.NombreCuenta = 'Inventarios' 
+                    WHERE E.IdEmpresa = 1
+                    GROUP BY E.IdEmpresa;
 ";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -75,10 +75,43 @@ GROUP BY E.IdEmpresa;
                                 {
                                     double pruebaAcida = (activoCirculante - inventarios) / pasivoCirculante;
                                     PruebaRapidatxt.Text = pruebaAcida.ToString("N2");
+                                    // Generar conclusión
+                                    string conclusion = $"La prueba ácida calculada es: {pruebaAcida:N2}. ";
+
+                                    // Interpretar el resultado
+                                    if (pruebaAcida >= 1.0)
+                                    {
+                                        conclusion += "Esto significa que la empresa tiene activos líquidos suficientes para cubrir sus pasivos circulantes sin tener que liquidar su inventario, lo cual es una señal positiva. ";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "Esto indica que la empresa podría tener problemas de liquidez, ya que no tiene suficientes activos líquidos para cubrir sus pasivos circulantes. ";
+                                    }
+
+                                    // Comparar con el promedio de la industria (si está disponible)
+                                    if (double.TryParse(txtPromedioDeLaIndustria.Text, out double promedioIndustria))
+                                    {
+                                        if (pruebaAcida > promedioIndustria)
+                                        {
+                                            conclusion += $"Además, la prueba ácida de la empresa es mayor que el promedio de la industria ({promedioIndustria:N2}), lo cual es favorable.";
+                                        }
+                                        else if (pruebaAcida < promedioIndustria)
+                                        {
+                                            conclusion += $"Además, la prueba ácida de la empresa es menor que el promedio de la industria ({promedioIndustria:N2}), lo que podría ser una debilidad comparativa.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += "La prueba ácida de la empresa es igual al promedio de la industria.";
+                                        }
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {
                                     PruebaRapidatxt.Text = "N/A";
+                                    ConclusionTextBox.Text = "El pasivo circulante no puede ser cero para calcular la prueba ácida.";
                                     MessageBox.Show("El pasivo circulante no puede ser cero para este cálculo.", "Advertencia");
                                 }
                             }

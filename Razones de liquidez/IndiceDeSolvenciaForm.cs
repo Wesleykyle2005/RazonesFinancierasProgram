@@ -70,10 +70,51 @@ GROUP BY E.IdEmpresa;
                                 {
                                     double indiceDeSolvencia = activoCirculante / pasivoCirculante;
                                     IndiceSolvenciatxtBox.Text = indiceDeSolvencia.ToString("N2");
+                                    // Generar conclusión
+                                    string conclusion = $"El índice de solvencia calculado es: {indiceDeSolvencia:N2}. ";
+
+                                    // Interpretar el índice de solvencia
+                                    if (indiceDeSolvencia > 1)
+                                    {
+                                        conclusion += "Esto significa que los activos circulantes de la empresa son suficientes para cubrir sus pasivos circulantes, lo cual es una señal positiva de liquidez. ";
+                                    }
+                                    else if (indiceDeSolvencia == 1)
+                                    {
+                                        conclusion += "Esto significa que los activos circulantes de la empresa son exactamente iguales a sus pasivos circulantes, lo cual es una situación de equilibrio. ";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "Esto indica que los activos circulantes de la empresa no son suficientes para cubrir sus pasivos circulantes, lo que representa un riesgo de liquidez. ";
+                                    }
+
+                                    // Evaluar porcentaje de reducción posible
+                                    double porcentajeReduccion = (1.0 - (1.0 / indiceDeSolvencia)) * 100;
+                                    conclusion += $"La empresa puede reducir sus activos circulantes hasta en un {porcentajeReduccion:N2}% sin perder la capacidad de cubrir sus pasivos a corto plazo. ";
+
+                                    // Comparar con el promedio de la industria (si está disponible)
+                                    if (double.TryParse(txtPromedioDeLaIndustria.Text, out double promedioIndustria))
+                                    {
+                                        if (indiceDeSolvencia > promedioIndustria)
+                                        {
+                                            conclusion += $"Además, el índice de solvencia de la empresa es mayor que el promedio de la industria ({promedioIndustria:N2}), lo cual es favorable.";
+                                        }
+                                        else if (indiceDeSolvencia < promedioIndustria)
+                                        {
+                                            conclusion += $"Además, el índice de solvencia de la empresa es menor que el promedio de la industria ({promedioIndustria:N2}), lo que podría ser una debilidad comparativa.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += "El índice de solvencia de la empresa es igual al promedio de la industria.";
+                                        }
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {
                                     IndiceSolvenciatxtBox.Text = "N/A";
+                                    ConclusionTextBox.Text = "El pasivo circulante no puede ser cero para calcular el índice de solvencia.";
                                     MessageBox.Show("El pasivo circulante no puede ser cero para este cálculo.", "Advertencia");
                                 }
                             }

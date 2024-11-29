@@ -74,6 +74,49 @@ namespace RazonesFinancieras.Razones_de_actividad
                                 {
                                     double rotaciondeactivosfijos = ventas / activosfijos;
                                     RotacionDeActivosFijostxt.Text = rotaciondeactivosfijos.ToString("N2");
+                                    // Comparar con el promedio de la industria si está disponible
+                                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria
+                                    double promedioIndustria;
+
+                                    string conclusion = $"La rotación de activos fijos es de {rotaciondeactivosfijos:F2} veces.\n";
+
+                                    // Evaluar si el coeficiente es mayor que 1.0
+                                    if (rotaciondeactivosfijos < 1.0)
+                                    {
+                                        conclusion += "Este valor es inferior a 1.0, lo que sugiere una ineficiencia en el uso de los activos fijos.";
+                                    }
+                                    else if (rotaciondeactivosfijos > 1.0)
+                                    {
+                                        conclusion += "Este valor es superior a 1.0, lo que indica eficiencia en el uso de los activos fijos.";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "Este valor es igual a 1.0, lo que sugiere un uso equilibrado de los activos fijos.";
+                                    }
+
+                                    // Comparar con el promedio de la industria si está disponible
+                                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                                    {
+                                        if (rotaciondeactivosfijos < promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste valor es inferior al promedio de la industria ({promedioIndustria:F2} veces), lo que sugiere una menor eficiencia en el uso de los activos fijos.";
+                                        }
+                                        else if (rotaciondeactivosfijos > promedioIndustria)
+                                        {
+                                            conclusion += $"\nEste valor es superior al promedio de la industria ({promedioIndustria:F2} veces), lo que indica una mayor eficiencia en el uso de los activos fijos.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += $"\nEste valor es similar al promedio de la industria ({promedioIndustria:F2} veces), lo que sugiere una eficiencia comparable en el uso de los activos fijos.";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        conclusion += "\nNo se pudo comparar con el promedio de la industria.";
+                                    }
+
+                                    // Mostrar la conclusión en el TextBox de conclusiones
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {

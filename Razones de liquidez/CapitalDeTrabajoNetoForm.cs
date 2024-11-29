@@ -72,6 +72,44 @@ namespace RazonesFinancieras.Razones_de_liquidez
                                 // Calcular el Capital de Trabajo Neto
                                 double capitalDeTrabajoNeto = activoCirculante - pasivoCirculante;
                                 CapitalDeTrabajoNetotextBox.Text = capitalDeTrabajoNeto.ToString("N2");
+                                // Generar la conclusión
+                                string conclusion = $"El resultado del Capital de Trabajo Neto es: {capitalDeTrabajoNeto:N2}. ";
+
+                                // Evaluar si el valor es bueno o malo
+                                if (capitalDeTrabajoNeto > 0)
+                                {
+                                    conclusion += "Esto indica que la empresa tiene un margen de seguridad para cumplir con sus obligaciones futuras cercanas, lo cual es positivo. ";
+
+                                    // Evaluar si el valor es excesivo
+                                    if (capitalDeTrabajoNeto > activoCirculante * 0.5)
+                                    {
+                                        conclusion += "Sin embargo, el capital de trabajo parece excesivo, lo que podría indicar fondos ociosos. ";
+                                    }
+                                }
+                                else
+                                {
+                                    conclusion += "Esto indica que la empresa podría tener problemas de liquidez, ya que el pasivo circulante excede el activo circulante. ";
+                                }
+
+                                // Comparar con el promedio de la industria (si está disponible)
+                                if (double.TryParse(txtPromedioDeLaIndustria.Text, out double promedioIndustria))
+                                {
+                                    if (capitalDeTrabajoNeto > promedioIndustria)
+                                    {
+                                        conclusion += $"Además, el Capital de Trabajo Neto de la empresa es mayor que el promedio de la industria ({promedioIndustria:N2}), lo cual es favorable.";
+                                    }
+                                    else if (capitalDeTrabajoNeto < promedioIndustria)
+                                    {
+                                        conclusion += $"Además, el Capital de Trabajo Neto de la empresa es menor que el promedio de la industria ({promedioIndustria:N2}), lo cual podría ser un área de mejora.";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "El Capital de Trabajo Neto de la empresa es igual al promedio de la industria.";
+                                    }
+                                }
+
+                                // Mostrar la conclusión en el TextBox
+                                ConclusionTextBox.Text = conclusion;
                             }
                             else
                             {

@@ -76,6 +76,48 @@ namespace RazonesFinancieras.Razones_de_actividad
                 // Calcular y mostrar la rotación de inventarios
                 double rotacionDeInventarios = costos / inventarios;
                 RotacionInventariostxt.Text = rotacionDeInventarios.ToString("F2");
+                // Calcular el período en meses y días
+                double periodoEnMeses = 12 / rotacionDeInventarios;
+                double periodoEnDias = 360 / rotacionDeInventarios;
+
+               
+
+                // Generar interpretación
+                string conclusion = $"La rotación de inventarios es {rotacionDeInventarios:N2}. Esto significa que la empresa renueva su inventario aproximadamente cada {periodoEnMeses:F2} meses o cada {periodoEnDias:F2} días. ";
+
+                // Evaluar eficiencia
+                if (rotacionDeInventarios > 6)
+                {
+                    conclusion += "Esto indica una alta eficiencia en el manejo de inventarios, con un buen ritmo de ventas. ";
+                }
+                else if (rotacionDeInventarios >= 3 && rotacionDeInventarios <= 6)
+                {
+                    conclusion += "El índice es moderado, lo que sugiere un manejo aceptable de inventarios, aunque podría mejorarse. ";
+                }
+                else
+                {
+                    conclusion += "El índice es bajo, indicando posibles problemas con exceso de inventarios o baja rotación de los mismos. ";
+                }
+
+                // Comparar con el promedio de la industria
+                if (double.TryParse(txtPromedioDeLaIndustria.Text, out double promedioIndustria))
+                {
+                    if (rotacionDeInventarios > promedioIndustria)
+                    {
+                        conclusion += $"La rotación de inventarios es superior al promedio de la industria ({promedioIndustria:N2}), lo cual es positivo.";
+                    }
+                    else if (rotacionDeInventarios < promedioIndustria)
+                    {
+                        conclusion += $"La rotación de inventarios es inferior al promedio de la industria ({promedioIndustria:N2}), lo que indica que hay margen de mejora.";
+                    }
+                    else
+                    {
+                        conclusion += "La rotación de inventarios está en línea con el promedio de la industria.";
+                    }
+                }
+
+                // Mostrar la conclusión en el TextBox
+                ConclusionTextBox.Text = conclusion;
             }
             catch (SqlException sqlEx)
             {

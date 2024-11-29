@@ -79,6 +79,34 @@ GROUP BY E.IdEmpresa;";
                 {
                     Double periodoPromedioDeCobro = cuentasPorCobrar / (ventas / 360);
                     PeriodoPromedioDeCobrotxt.Text = periodoPromedioDeCobro.ToString("F2");
+                    // Comparar con el promedio de la industria
+                    string promedioIndustriaText = txtPromedioDeLaIndustria.Text; // Obtener el valor del promedio de la industria del TextBox
+                    double promedioIndustria;
+
+                    if (double.TryParse(promedioIndustriaText, out promedioIndustria))
+                    {
+                        string conclusion = $"El período promedio de cobro es de {periodoPromedioDeCobro:F2} días.\n";
+
+                        if (periodoPromedioDeCobro < promedioIndustria)
+                        {
+                            conclusion += $"Este valor es inferior al promedio de la industria ({promedioIndustria:F2} días), lo cual indica una rápida recuperación de las cuentas por cobrar.";
+                        }
+                        else if (periodoPromedioDeCobro > promedioIndustria)
+                        {
+                            conclusion += $"Este valor es superior al promedio de la industria ({promedioIndustria:F2} días), lo que podría indicar un retraso en la recuperación de cuentas por cobrar.";
+                        }
+                        else
+                        {
+                            conclusion += $"Este valor es similar al promedio de la industria ({promedioIndustria:F2} días), lo que sugiere una recuperación normal de las cuentas por cobrar.";
+                        }
+
+                        // Mostrar la conclusión en el TextBox de conclusiones
+                        ConclusionTextBox.Text = conclusion;
+                    }
+                    else
+                    {
+                        ConclusionTextBox.Text=$"El periodo promedio de cobro es de: {periodoPromedioDeCobro:F2} días.";
+                    }
                 }
                 else
                 {

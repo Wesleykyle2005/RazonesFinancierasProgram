@@ -73,10 +73,50 @@ GROUP BY E.IdEmpresa;
                                 {
                                     double rotacionDeCuentasPorCobrar = ventas / cuentasporcobrar;
                                     RotacionDeCuentasPorCobrartxt.Text = rotacionDeCuentasPorCobrar.ToString("N2");
+                                    // Calcular el período promedio de recuperación en días
+                                    double periodoDeRecuperacionDias = 360 / rotacionDeCuentasPorCobrar;
+                                   
+
+                                    // Interpretación
+                                    string conclusion = $"La rotación de cuentas por cobrar es {rotacionDeCuentasPorCobrar:N2}, lo que indica que las cuentas se cobran aproximadamente cada {periodoDeRecuperacionDias:N2} días. ";
+
+                                    if (rotacionDeCuentasPorCobrar > 6)
+                                    {
+                                        conclusion += "Esto refleja un alto grado de liquidez en las cuentas por cobrar, con una recuperación rápida. ";
+                                    }
+                                    else if (rotacionDeCuentasPorCobrar >= 3 && rotacionDeCuentasPorCobrar <= 6)
+                                    {
+                                        conclusion += "El índice es moderado, indicando una recuperación aceptable, pero con margen de mejora. ";
+                                    }
+                                    else
+                                    {
+                                        conclusion += "El índice es bajo, lo que sugiere lentitud en la recuperación de las cuentas por cobrar y bajo grado de liquidez. ";
+                                    }
+
+                                    // Comparar con el promedio de la industria
+                                    if (double.TryParse(txtPromedioDeLaIndustria.Text, out double promedioIndustria))
+                                    {
+                                        if (rotacionDeCuentasPorCobrar > promedioIndustria)
+                                        {
+                                            conclusion += $"El resultado supera el promedio de la industria ({promedioIndustria:N2}), lo cual es positivo.";
+                                        }
+                                        else if (rotacionDeCuentasPorCobrar < promedioIndustria)
+                                        {
+                                            conclusion += $"El resultado está por debajo del promedio de la industria ({promedioIndustria:N2}), indicando áreas de mejora.";
+                                        }
+                                        else
+                                        {
+                                            conclusion += "La rotación está alineada con el promedio de la industria.";
+                                        }
+                                    }
+
+                                    // Mostrar la conclusión
+                                    ConclusionTextBox.Text = conclusion;
                                 }
                                 else
                                 {
                                     RotacionDeCuentasPorCobrartxt.Text = "N/A";
+                                    
                                     MessageBox.Show("Las cuentas por cobrar no pueden ser cero para este cálculo.", "Advertencia");
                                 }
                             }
